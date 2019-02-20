@@ -1,0 +1,29 @@
+forum_category_routing:
+    resource: "@ForumBundle/Controller/CategoryController.php"
+    prefix:   /ecoforum
+    type:     annotation
+
+forum_forum_routing:
+    resource: "@ForumBundle/Controller/ForumController.php"
+    prefix:   /ecoforum
+    type:     annotation
+
+forum_topic_routing:
+    resource: "@ForumBundle/Controller/TopicController.php"
+    prefix:   /ecoforum
+    type:     annotation
+
+forum__post_routing:
+    resource: "@ForumBundle/Controller/PostController.php"
+    prefix:   /ecoforum
+    type:     annotation
+
+forum_label_routing:
+    resource: "@ForumBundle/Controller/LabelController.php"
+    prefix:   /ecoforum
+    type:     annotation
+
+forum_admin_routing:
+    resource: "@ForumBundle/Controller/AdminController.php"
+    prefix:   /ecoforum
+    type:     annotation
