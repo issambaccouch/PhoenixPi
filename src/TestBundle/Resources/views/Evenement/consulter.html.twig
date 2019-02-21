@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="body">
+        <div role="main" class="main shop">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <hr class="tall">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="mb-0"><strong>Evenements</strong></h1>
+                    </div>
+                </div>
+                {% for evenement in evenements%}
+                <div class="masonry-loader masonry-loader-showing">
+
+                    <div class="row products product-thumb-info-list mt-3" data-plugin-masonry>
+                        <div class="col-12 col-sm-6 col-lg-3 product">
+								<span class="product-thumb-info">
+									<a href="shop-cart.html" class="add-to-cart-product">
+									</a>
+									<a href="{{ path('detail_events',{'id':evenement.idev}) }}">
+										<span class="product-thumb-info-image">
+											<span class="product-thumb-info-act">
+												<span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+											</span>
+											<img alt="" class="img-fluid" src="{{asset('styling/img/products/product-2.jpg')}}">
+										</span>
+									</a>
+									<span class="product-thumb-info-content">
+										<a href="detailevents">
+											<h4>{{evenement.nomev}}</h4>
+											<span class="price">
+												<span class="amount">Nombre des places disponible: {{evenement.nbrparticipants}} </span>
+											</span>
+										</a>
+									</span>
+								</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="row">
+                    <div class="col">
+                        <ul class="pagination float-right">
+                            <li class="page-item"><a class="page-link" href="#">«</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

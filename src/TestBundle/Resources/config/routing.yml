@@ -1,3 +1,54 @@
 test_homepage:
     path:     /
     defaults: { _controller: TestBundle:Default:index }
+
+gerer_events:
+    path:     /gererevents
+    defaults: { _controller: TestBundle:Evenement:read }
+
+gerer_events_Ajax:
+    path:     /gerereventsajax
+    defaults: { _controller: TestBundle:Evenement:rechercheajax }
+
+
+delete_events:
+    path:     /deleteevents/{id}
+    defaults: { _controller: TestBundle:Evenement:delete }
+
+update_events:
+    path:     /updateevents/{id}
+    defaults: { _controller: TestBundle:Evenement:update }
+
+detail_events:
+    path:     /detailevents/{id}
+    defaults: { _controller: TestBundle:Evenement:detail }
+
+add_events:
+    path:     /addevents
+    defaults: { _controller: TestBundle:Evenement:ajouter }
+
+consult_events:
+    path:     /consultevents
+    defaults: { _controller: TestBundle:Evenement:consulter }
+
+participer_events:
+    path:     /participereventss/{id}
+    defaults: { _controller: TestBundle:Evenement:Participer }
+
+add_promo:
+    path:     /addpromo
+    defaults: { _controller: TestBundle:Promotion:ajouter }
+
+delete_promo:
+    path:     /deletepromo/{id}
+    defaults: { _controller: TestBundle:Promotion:delete }
+
+update_promo:
+    path:     /updatepromo/{id}
+    defaults: { _controller: TestBundle:Promotion:update }
+
+gerer_promo:
+    path:     /gererpromo
+    defaults: { _controller: TestBundle:Promotion:read }
+
+

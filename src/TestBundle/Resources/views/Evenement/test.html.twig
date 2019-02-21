@@ -1,0 +1,43 @@
+<html>
+<head>
+
+</head>
+<body>
+<center>
+    <h1>Mes evenements    {{ date }} </h1>
+
+    <form>
+        <fieldset style="width: 20%">
+            <input type="text" name="nom" id="cle">
+        </fieldset>
+    </form>
+    <table id="t"></table>
+</center>
+
+<script src="{{ asset('jquery.js') }}"></script><!--pour l'importation du bibliotheque jquery  -->
+<script>
+    $('#cle').keyup(
+        function () {
+            var input=$('#cle').val();
+            $.ajax({url:"{{ path ('gerer_events_Ajax')}}",
+                type:'POST',data:{'nom':input},
+                success:function (data) {console.log(data);
+                    $.each(data,function ( i,ele) {
+                        $('#t').append(
+                            "<tr>"+
+                            "<td>"+ele.idev+"</td>"+
+                            "<td>"+ele.nomev+"</td>"+
+                            "<td>"+ele.nbrparticipants+"</td>"+
+                            "<td>"+ele.lieu+"</td>"+
+                            "</tr>"
+                        )
+
+                    })}
+
+            })
+
+        }
+    )
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+admin_homepage:
+    path:    /admin
+    defaults: { _controller: AdminBundle:Default:index }
+
+gerer_events_admin:
+    path:     /admin/gererevents
+    defaults: { _controller: AdminBundle:Evenement:read }
+
+delete_events_admin:
+    path:     /admin/deleteevents/{id}
+    defaults: { _controller: AdminBundle:Evenement:delete }
+
+update_events_admin:
+    path:     /admin/updateevents/{id}
+    defaults: { _controller: AdminBundle:Evenement:update }
+
+approuver_events_admin:
+    path:     /admin/approuverevents/{id}
+    defaults: { _controller: AdminBundle:Evenement:approuver }
+
+add_events_admin:
+    path:     /admin/addevents
+    defaults: { _controller: AdminBundle:Evenement:ajouter }
+
+gerer_promo_admin:
+    path:     /admin/gererpromo
+    defaults: { _controller: AdminBundle:Promotion:read }
+
+add_promo_admin:
+    path:     /admin/addpromo
+    defaults: { _controller: AdminBundle:Promotion:ajouter }
+
+delete_promo_admin:
+    path:     /admin/deletepromo
+    defaults: { _controller: AdminBundle:Promotion:delete }
+
+update_promo_admin:
+    path:     /admin/updatepromo
+    defaults: { _controller: AdminBundle:Promotion:update }
+
