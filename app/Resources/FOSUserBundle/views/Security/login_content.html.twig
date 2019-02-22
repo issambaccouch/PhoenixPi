@@ -4,9 +4,7 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    welcome
 {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    welcome
 {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
     <div class="container">
         <div class="row">
