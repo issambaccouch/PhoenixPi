@@ -23,7 +23,7 @@
   </ul>
 
   {{ knp_pagination_render(posts) }}
-  
+  {% if topic.closed == false %}
   {% if form is not null %}
     <h2>{{ topic.title }}</h2>
     {% if date(topic.lastpost) < date('-1month') %}
@@ -31,4 +31,6 @@
     {% endif %}
     {% include '@Forum/Form/Post.html.twig' %}
   {% endif %}
+  {% endif %}
+
 {% endblock %}

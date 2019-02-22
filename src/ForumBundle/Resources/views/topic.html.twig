@@ -59,6 +59,7 @@
  
 
   {{ knp_pagination_render(pagination) }}
-  
-  {% if form is not null %}{% include 'ForumBundle:Form:Topic.html.twig' %}{% endif %}
+  {% if form is not null %}
+    {% include 'ForumBundle:Form:Topic.html.twig' %}
+  {% endif %}
 {% endblock %}
