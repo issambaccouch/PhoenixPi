@@ -33,7 +33,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * infos: Find lastEdited 
      *
      * @param class ForumBundle\Entity\Forum $forum
      * @return array $forumsList
