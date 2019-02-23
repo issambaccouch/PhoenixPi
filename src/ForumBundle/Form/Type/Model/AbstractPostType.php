@@ -4,9 +4,7 @@ namespace ForumBundle\Form\Type\Model;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 class AbstractPostType extends AbstractType
 {
     /**
@@ -15,7 +13,7 @@ class AbstractPostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', TextareaType::class, array('label'  => 'forum.post'));
+        $builder->add('content', CKEditorType::class);
     }
   
     /**

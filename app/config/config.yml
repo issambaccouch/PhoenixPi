@@ -106,12 +106,18 @@ knp_paginator:
 
 forum:
     preview:
-        enabled: true
+        enabled: false
     knp_paginator:
-        page_name: p  #see knp_paginator.default_option.page_name
+        page_name: p
         topics:
             enabled: true
             per_page: 10
         posts:
             enabled: true
             per_page: 10
+
+fos_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+
