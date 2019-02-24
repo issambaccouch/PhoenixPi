@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+
+
+            <h2 class="card-title" align="center">CATEGORIE</h2>
+        </header>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mb-3" align="right" >
+                        <button id="addToTable" class="btn btn-primary"><a href="{{path('tags_create')}}">Add categorie</a> <i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+                <thead>
+                <tr>
+                    <th>ID_CAT</th>
+                    <th>NOM_CAT</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for tags in tags%}
+                    <tr data-item-id="1">
+                        <td> {{ tags.idtag }} </td>
+                        <td>{{ tags.nomtag }}</td>
+
+
+                        <td class="actions">
+
+                            <a  href="{{ path('tags_delete',{'idtag':tags.idtag}) }}" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </section>
+    </div>{% endblock %}

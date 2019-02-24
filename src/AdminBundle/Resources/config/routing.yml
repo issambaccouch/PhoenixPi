@@ -1,0 +1,15 @@
+admin_homepage:
+    path:    /admin
+    defaults: { _controller: AdminBundle:Default:index }
+admin_read:
+    path:    /admin/read
+    defaults: { _controller: AdminBundle:Article:read }
+admin_create:
+    path:    /admin/create
+    defaults: { _controller: AdminBundle:Article:create }
+admin_delete:
+    path:    /admin/delete/{idart}
+    defaults: { _controller: AdminBundle:Article:delete }
+admin_update:
+    path:    /admin/update
+    defaults: { _controller: AdminBundle:Article:update }

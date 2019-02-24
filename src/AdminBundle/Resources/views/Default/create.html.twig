@@ -1,0 +1,19 @@
+{% extends "adminbase.html.twig" %}
+{% block body %}
+
+    <html>
+    <head>
+    </head>
+    <body>
+    <center > <h1 style="color: #00A0D1" ><u>AJOUTER UN ARTICLE</u></h1></center>
+
+    <center>
+        {{ form_start(form) }}
+        <br><input type="submit" id="_submit" name="_submit" value="Ajouter un Article" class="btn btn-primary  mb-3"></br>
+
+        {{ form_end(form) }}
+
+    </center>
+    </body>
+    </html>
+{% endblock %}

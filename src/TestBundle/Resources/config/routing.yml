@@ -1,3 +1,58 @@
 test_homepage:
     path:     /
     defaults: { _controller: TestBundle:Default:index }
+test_pdfexample:
+    path:     /pdf-example
+    defaults: { _controller: TestBundle:Article:pdf }
+article_create:
+    path:    /article/create
+    defaults: { _controller: TestBundle:Article:create }
+article_read:
+    path:    /article/read
+    defaults: { _controller: TestBundle:Article:read }
+article_delete:
+     path:    /article/delete/{idart}
+     defaults: { _controller: TestBundle:Article:delete }
+article_update:
+     path:    /article/update/{idart}
+     defaults: { _controller: TestBundle:Article:update }
+article_rech:
+     path:    /article/rech
+     defaults: { _controller: TestBundle:Article:recherche }
+article_Search:
+      path:    /article/search
+      defaults: { _controller: TestBundle:Article:rechercheajax }
+article_list:
+     path:    /article/list/{idart}
+     defaults: { _controller: TestBundle:Article:list }
+
+article_readsingle:
+    path:    /article/readsingle
+    defaults: { _controller: TestBundle:Article:readsingle }
+tags_create:
+    path:    /admin/tags/create
+    defaults: { _controller: TestBundle:Tags:create }
+tags_update:
+    path:    /admin/tags/update/{idtag}
+    defaults: { _controller: TestBundle:Tags:update }
+tags_read:
+    path:    /tags/read
+    defaults: { _controller: TestBundle:Tags:read }
+tags_delete:
+    path:    /tags/delete/{idtag}
+    defaults: { _controller: TestBundle:Tags:delete }
+reclamation_show:
+    path:    /reclamation/show
+    defaults: { _controller: TestBundle:Reclamation:show }
+reclamation_index:
+    path:    /reclamation
+    defaults: { _controller: TestBundle:Reclamation:index }
+reclamation_edit:
+    path:    /reclamation/edit/{idrec}
+    defaults: { _controller: TestBundle:Reclamation:edit }
+reclamation_delete:
+    path:    /reclamation
+    defaults: { _controller: TestBundle:Reclamation:delete }
+reclamation_new:
+    path:    /reclamation/new
+    defaults: { _controller: TestBundle:Reclamation:new }

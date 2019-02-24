@@ -10,4 +10,5 @@ class TestBundle extends Bundle
     {
         return "FOSUserBundle";
      }
+
 }

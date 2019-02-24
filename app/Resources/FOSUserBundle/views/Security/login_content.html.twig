@@ -8,7 +8,9 @@
         <div class="col">
             <div class="featured-boxes">
                 <form action="{{ path("fos_user_security_check") }}" method="post">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    {% endif %}
                     <div class="form-row">
                         <div class="form-group col">
                             <div class="rounded-circle text-center"><img src="{{asset('styling/img/ecosysimg.jpg')}}"></div>

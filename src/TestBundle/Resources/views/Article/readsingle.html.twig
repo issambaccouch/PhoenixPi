@@ -1,0 +1,110 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div role="main" class="main shop">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <hr class="tall mt-4">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="mb-0"><strong>Article</strong></h1>
+                    </div>
+                </div>
+                <div class="masonry-loader masonry-loader-loaded">
+                    <div class="row products product-thumb-info-list mt-3" data-plugin-masonry>
+                        {% for article in article %}
+
+                            <div class="col-sm-6 col-lg-4 product">
+
+
+										<span class="product-thumb-info">
+											<a href="{{ path('article_list',{'idart':article.idart}) }}">
+												<span class="product-thumb-info-image">
+													<span class="product-thumb-info-act">
+														<span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+													</span>
+													<img alt="" class="img-fluid" src="{{ asset('assets/images/' ~ article.imageart) }}" height="70px" width="50px">
+												</span>
+											</a>
+											<span class="product-thumb-info-content">
+												<a href="{{ path('article_list',{'idart':article.idart}) }}">
+													<h4 class="heading-primary">{{article.titre}}</h4>
+														<span class="amount">{{article.nbrvue}}</span>
+														<span class="amount">{{article.text}}</span>
+
+
+												</a>
+											</span>
+										</span>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <aside class="sidebar">
+
+                    <form>
+                        <div class="input-group input-group-4">
+                            <input class="form-control" placeholder="Search..." name="s" id="s" type="POST">
+                            <span class="input-group-btn">
+											<button type="POST" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
+										</span>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                    <h5 class="heading-primary">Tags</h5>
+                    {% for tags in tags %}
+                        <a href="tags/read"><span class="badge badge-dark">{{ tags.nomtag }}</span></a>
+                    {% endfor %}
+
+                    <hr>
+
+                    <h5 class="heading-primary">Top View Article</h5>
+                    <ul class="simple-post-list">
+                        {% for article in article %}
+
+                            <li>
+                                <div class="post-image">
+                                    <div class="img-thumbnail d-block">
+                                        <a href="{{ path('article_list',{'idart':article.idart}) }}">
+
+                                            <h4 class="heading-primary">{{article.titre}}</h4>
+                                            <span class="amount">{{article.nbrvue}}</span>
+                                            <span class="amount">{{article.text}}</span>
+                                            <img alt="" class="img-fluid" src="{{ asset('assets/images/' ~ article.imageart) }}" height="70px" width="50px">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="post-info">
+                                    {% for article in article %}
+                                        <a href="href="{{ path('article_readsingle',{'imageart':article.imageart}) }}"></a>
+                                    {% endfor %}
+
+                                    <div class="post-meta">
+
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+
+                </aside>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

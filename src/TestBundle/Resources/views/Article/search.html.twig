@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+
+    <div class="container">
+        <section class="card card-admin">
+            <header class="card-header">
+
+
+                <h2 class="card-title" align="center">Article</h2>
+            </header>
+            <div class="header-search d-none d-md-block" >
+                <form  method="post">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="nom" id="cle" placeholder="Search..." required="">
+                        <span class="input-group-btn">
+													<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+												</span>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <button id="addToTable" class="btn btn-primary"><a href="{{path('article_create')}}" style="color: #fafffb">Ajouter Article</a> <i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped mb-0" id="t">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date </th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for articles in articles%}
+                        <tr data-item-id="1">
+                            <td> {{ articles.titre }} </td>
+                            <td>{{ articles.text }}</td>
+                            <td>{{ articles.nbrvue }}</td>
+                            <td>{{ articles.dateajout|date }}</td>
+                            <td class="actions">
+                                <a href="{{ path('article_update',{'idart':articles.idart}) }}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                                <a  href="{{ path('article_delete',{'idart':articles.idart}) }}" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    {%endfor%}
+                </table>
+            </div>
+        </section>
+    </div>
+    <script src="{{ asset('jquery.js') }}"></script><!--pour l'importation du bibliotheque jquery  -->
+    <script>
+        $('#cle').keyup(
+            function () {
+                var input=$('#cle').val();
+                $.ajax({url:"{{ path ('article_rech')}}",
+                    type:'POST',data:{'nom':input},
+                    success:function (data) {console.log(data);
+
+                        $.each(data,function ( i,ele) {
+                            $('#t').append(
+                                "<tr bgcolor='aqua'>"+
+                                "<td>"+ele.titre+"</td>"+
+                                "<td>"+ele.text+"</td>"+
+                                "<td>"+ele.nbrvue+"</td>"+
+                                "<td>"+"</td>"+
+                                "<td>"+"</td>"+
+                                "<td>"+ "</td>"+
+                                "</tr>"
+                            )
+
+                        })}
+
+                })
+
+            }
+        )
+    </script>
+{% endblock %}

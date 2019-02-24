@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}<center> <h1>Index</h1>
+    <p class="important">
+        {{ form_start(form) }}
+        <br><input type="submit" id="_submit" name="_submit" value="Modifier un Article" class="btn btn-primary  mb-3"></br>
+
+        {{ form_end(form) }}
+    </p></center>
+
+{% endblock %}
