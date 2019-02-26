@@ -10,4 +10,5 @@ namespace TestBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

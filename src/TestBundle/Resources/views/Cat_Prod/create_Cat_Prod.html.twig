@@ -1,0 +1,21 @@
+{% extends "adminbase.html.twig" %}
+{% block body %}
+
+    <html>
+    <head>
+    </head>
+    <body>
+    <center > <h1 style="color: #00A0D1" ><u>Ajouter un Workshop</u></h1></center>
+
+    <center>
+        {{ form_start(form) }}
+        <table>
+            <tr><td>Nom Categorie Produit :     </td><td>{{ form_widget(form.nomcp) }}</td></tr>
+
+        </table>
+        <br><input type="submit" id="_submit" name="_submit" value="Ajouter" class="btn btn-primary  mb-3"></br>
+        {{ form_end(form) }}
+    </center>
+    </body>
+    </html>
+{% endblock %}

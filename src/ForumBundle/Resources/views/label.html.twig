@@ -1,9 +1,0 @@
-<div class="raw">
-    <a href="{{ path('label_solved', {'slug': topic.slug}) }}">{{ 'forum.label.solved'|trans }}</a>
-    {% if is_granted('ROLE_MODERATOR') %}
-      <a href="{{ path('label_closed', {'slug': topic.slug}) }}">{{ 'forum.label.closed'|trans }}</a>
-      {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('label_pinned', {'slug': topic.slug}) }}">{{ 'forum.label.pinned'|trans }}</a>
-      {% endif %}
-    {% endif %}
-</div>

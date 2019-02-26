@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <html>
+    <head>
+    </head>
+    <body>
+    <center > <h1 style="color: #00A0D1" ><u>Ajouter un Produit</u></h1></center>
+
+    <center>
+        {{ form_start(form) }}
+        <table>
+            <tr><td>Nom Produit :     </td><td>{{ form_widget(form.nomp) }}</td></tr>
+            <tr><td>Prix :     </td><td>{{ form_widget(form.prix) }}</td></tr>
+            <tr><td>Description :     </td><td>{{ form_widget(form.description) }}</td></tr>
+            <tr><td>Image de Produit :     </td><td>{{ form_widget(form.imagep) }}</td></tr>
+
+
+
+            <tr><td>Nom Categorie Produit :     </td><td>{{ form_widget(form.idcp) }}</td></tr>
+
+        </table>
+        <br><input type="submit" id="_submit" name="_submit" value="Ajouter" class="btn btn-primary  mb-3"></br>
+        {{ form_end(form) }}
+    </center>
+    </body>
+    </html>
+{% endblock %}

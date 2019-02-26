@@ -6,7 +6,6 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class User
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
@@ -37,7 +36,6 @@ class User extends BaseUser
     {
         parent::__construct();
         // your own logic
-        $this->roles = array('ROLE_USER');
     }
 
     /**

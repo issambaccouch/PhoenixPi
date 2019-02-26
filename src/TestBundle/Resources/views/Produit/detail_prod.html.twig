@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+    {% block body %}
+        <div class="row">
+            <div class="col-lg-6 ">
+
+
+                    <div>
+                        <img alt="" height="300" width="500" class="img-fluid" src="{{asset('styling/img/products/ecoprod3.jpg')}}">
+                    </div>
+
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="summary entry-summary">
+                    <p class="price">
+                    <h1 class="mb-0"><strong>{{ produits.nomp }}</strong></h1>
+                    </p>
+                    <div title="Rated 5.00 out of 5" class="star-rating">
+                        <p class="price">
+                            <span style="width:100%"><strong class="rating">Description:</strong>{{ produits.description }} </span>
+                        </p>
+                    </div>
+
+                    <p class="price">
+                        <strong class="rating">Ajouté par:</strong><span class="amount">{{ users.prenom }} {{ users.nom }}</span>
+                    </p>
+                    <p class="price">
+                        <strong class="rating">Adresse mail:</strong><span class="amount">{{ users.email}}</span>
+                    </p>
+                    <p class="price">
+                        <strong class="rating">Categorie:</strong><span class="amount">{{ cats.nomcp }}</span>
+                    </p>
+                    {% if( produits.enpromo==1 ) %}
+
+
+                        <p class="mb-5"> <strong class="rating">Prix:</strong><del><span class="amount">{{produits.prix}}DT</span></del></p>
+
+                            <span class="amount" style="color: #6b0392" ><strong class="rating" >Nouvelle Prix:</strong>{{ produits.enpromo }}DT</span>
+                      {% else %}
+                          <p class="mb-5"> <strong class="rating">Prix:</strong><span class="amount">{{produits.prix}}DT</span></p>
+                    {% endif %}
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}

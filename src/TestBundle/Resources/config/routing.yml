@@ -1,3 +1,73 @@
 test_homepage:
     path:     /
     defaults: { _controller: TestBundle:Default:index }
+
+_create:
+    path:     /admin/Create_Cat_Prod
+    defaults: { _controller: TestBundle:Cat_Prod:Create }
+
+_update:
+    path:     /admin/Update_Cat_Prod/{idcp}
+    defaults: { _controller: TestBundle:Cat_Prod:Update }
+
+_read:
+    path:     /Read_Cat_Prod
+    defaults: { _controller: TestBundle:Cat_Prod:Read }
+
+_delete:
+    path:     /admin/delete_Cat_Prod/{idcp}
+    defaults: { _controller: TestBundle:Cat_Prod:delete }
+
+create:
+    path:     /create_prod
+    defaults: { _controller: TestBundle:Produit:create }
+
+
+
+update:
+    path:     /update_prod/{idpr}
+    defaults: { _controller: TestBundle:Produit:update }
+
+delete:
+    path:     /delete_prod/{idpr}
+    defaults: { _controller: TestBundle:Produit:delete }
+read:
+    path:     /read_prod
+    defaults: { _controller: TestBundle:Produit:read }
+read_rec:
+    path:     /read_prod_rec
+    defaults: { _controller: TestBundle:Produit:readRec }
+read_admin:
+    path:     /admin/read_prod_admin
+    defaults: { _controller: TestBundle:Produit:readAdmin }
+approuve_admin:
+    path:     /admin/approuve/{idpr}
+    defaults: { _controller: TestBundle:Produit:approuve }
+
+detail_prod:
+    path:     /detail_prod/{idpr}
+    defaults: { _controller: TestBundle:Produit:DetailProd }
+
+read_mesProd:
+    path:     /read_MesProd
+    defaults: { _controller: TestBundle:Produit:readMesProd }
+detail_MesProd:
+    path:     /detail_MesProd/{idpr}
+    defaults: { _controller: TestBundle:Produit:DetailMesProd }
+
+prod_filter:
+    path:     /read_Prod_filter/{idcat}
+    defaults: { _controller: TestBundle:Produit:readProdFilter }
+
+myprod_filter:
+    path:     /read_MyProd_filter/{idcat}
+    defaults: { _controller: TestBundle:Produit:readMyProdFilter }
+create_fav:
+    path:     /create_fav/{idcp}
+    defaults: { _controller: TestBundle:Favoris:create }
+
+delete_fav:
+    path:     /delete_fav/{idfav}
+    defaults: { _controller: TestBundle:Favoris:delete }
+
+

@@ -6,7 +6,6 @@ security:
         ROLE_USER:       ROLE_USER
         ROLE_FORMATEUR:       ROLE_FORMATEUR
         ROLE_SUPER_ADMIN: ROLE_ADMIN
-        ROLE_MODERATOR: ROLE_MODERATOR
 
     providers:
         fos_userbundle:
@@ -17,7 +16,9 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
+                login_path: /
                 csrf_token_generator: security.csrf.token_manager
+                success_handler: redirect.after.login
                 # if you are using Symfony < 2.8, use the following config instead:
                 # csrf_provider: form.csrf_provider
 

@@ -1,0 +1,122 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<div role="main" class="main shop">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <hr class="tall mt-4">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="">
+                        <h1><strong>Mes Produit de Categorie {{ cats.nomcp }}</strong></h1>
+                        {% for n in nbr %}
+                        <p>Showing 1–6 of {{ n.1 }} results.</p>
+                            {% endfor %}
+                        <div class="mb-3">
+                            <button id="addToTable" class="btn"><a href="http://localhost/pidevtow/web/app_dev.php/create_prod">Add Produit</a> <i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="masonry-loader masonry-loader-loaded">
+                    <div class="row products product-thumb-info-list mt-3" data-plugin-masonry>
+                        {% for produit in Produits %}
+
+                             <div class="col-sm-6 col-lg-4 product">
+                            {% if(  produit.enpromo==1) %}
+
+                                <span class="onsale">Sale!</span>
+
+                                <span class="product-thumb-info">
+											<a href="{{ path('detail_MesProd',{'idpr':produit.idpr}) }}">
+												<span class="product-thumb-info-image">
+													<span class="product-thumb-info-act">
+														<span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+													</span>
+													<img alt="" class="img-fluid" src="{{asset('styling/img/products/ecoprod.png')}}">
+												</span>
+											</a>
+											<span class="product-thumb-info-content">
+												<a href="{{ path('detail_MesProd',{'idpr':produit.idpr}) }}">
+													<h4 class="heading-primary">{{produit.nomp}}</h4>
+													<span class="price">
+														 <del><span class="amount">{{produit.prix}}DT</span></del>
+                                                        {% if( produit.enpromo==1 ) %}
+                                                            <ins><span class="amount">>>{{ produit.enpromo }}DT</span></ins>
+                                                        {% endif %}
+													</span>
+												</a>
+											</span>
+										</span>
+
+                            {% else %}
+                                    <span class="product-thumb-info">
+											<a href="{{ path('detail_MesProd',{'idpr':produit.idpr}) }}">
+												<span class="product-thumb-info-image">
+													<span class="product-thumb-info-act">
+														<span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+													</span>
+													<img alt="" class="img-fluid" src="{{asset('styling/img/products/ecoprod.png   ')}}">
+												</span>
+											</a>
+											<span class="product-thumb-info-content">
+												<a href="{{ path('detail_MesProd',{'idpr':produit.idpr}) }}">
+													<h4 class="heading-primary">{{produit.nomp}}</h4>
+													<span class="price">
+														<span class="amount">{{produit.prix}}DT</span>
+                                                        {% if( produit.enpromo==1 ) %}
+                                                            <ins><span class="amount">{{ produit.enpromo }}DT</span></ins>
+                                                        {% endif %}
+													</span>
+												</a>
+											</span>
+										</span>
+
+                            {% endif %}
+                             </div>
+                        {% endfor %}
+                         </div>
+
+
+
+                  <div class="navigation">
+
+                      <h1> <strong class="" > {{ knp_pagination_render(Produits) }}</strong></h1>
+
+                  </div>
+
+
+
+
+
+            </div>
+
+            </div>
+            <div class="col-lg-3">
+                <aside class="sidebar">
+
+                    <form>
+                        <div class="input-group input-group-4">
+                            <input class="form-control" placeholder="Search..." name="s" id="s" type="text">
+                            <span class="input-group-btn">
+											<button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
+										</span>
+                        </div>
+                    </form>
+
+
+
+
+
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

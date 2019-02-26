@@ -1,0 +1,135 @@
+{% extends "adminbase.html.twig" %}
+{% block body %}
+
+    </table>
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+            </div>
+
+           <center> <h2 class="card-title">LIST DES PRODUITS A APPROUVER </h2></center>
+        </header>
+        <p><div class="header-search d-none d-md-block" >
+            <form  method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="nom" id="cle" placeholder="Search..." required="">
+                    <span class="input-group-btn">
+													<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+												</span>
+                </div>
+            </form>
+        </div></p>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                       <p> <button id="addToTable" class="btn"><a href="http://localhost/pidevtow/web/app_dev.php/create_prod">Add Produit</a> <i class="fa fa-plus"></i></button>
+                       </p>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered  mb-0" >
+                <thead>
+                <tr>
+                    <td>
+                        Id
+                    </td>
+                    <td>
+                        Nom de produit
+                    </td>
+                    <td>
+                        Prix
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        Image
+                    </td>
+                    <td>
+                        Nom d'utilisateur
+                    </td>
+                    <td>
+                        Nom du categorie
+                    </td>
+
+                    <td>
+                        Action
+                    </td>
+
+                </tr>
+
+                </thead>
+                <tbody id="t" >
+                {% for w in Produits  %}
+                    <tr>
+                        <td>
+                            {{ w.idpr }}
+                        </td>
+
+                        <td>
+                            {{ w.nomp }}
+                        </td>
+                        <td>
+                            {{ w.prix }}
+                        </td>
+                        <td>
+                            {{ w.description }}
+                        </td>
+                        <td>
+                            {{ w.imagep }}
+                        </td>
+
+
+                        <td>
+                            {{ w.username }}
+                        </td>
+                        <td>
+                            {{ w.nomcp }}
+                        </td>
+                        <td class="actions">
+                            <!--<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+                            <a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>-->
+                            <a href="{{ path('approuve_admin',{'idpr':w.idpr}) }}" class="on-default edit-row"><i class="fa fa-thumbs-up"></i></a>
+                            <a  href="{{ path('delete',{'idpr':w.idpr}) }}" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </section>
+    <script src="{{ asset('jquery.js') }}"></script><!--pour l'importation du bibliotheque jquery  -->
+    <script>
+        $('#cle').keyup(
+            function () {
+                var input=$('#cle').val();
+                $.ajax({url:"{{ path ('read_admin')}}",
+                    type:'POST',data:{'nom':input},
+                    success:function (data) {
+                        $('#t').empty();
+
+                        $.each(data,function ( i,ele) {
+                            $('#t').append(
+                                console.log(data,"recherche ajax"),
+                                "<tr bgcolor='#7fffd4 '>"+
+                                "<td>"+ele.idpr+"</td>"+
+                                "<td>"+ele.nomp+"</td>"+
+                                "<td>"+ele.prix+"</td>"+
+                                "<td>"+ele.description+"</td>"+
+                                "<td>"+ele.imagep+"</td>"+
+                                "<td>"+ele.username+"</td>"+
+                                "<td>"+ ele.nomcp+"</td>"+
+                                "</tr>"
+                            )
+
+                        })}
+
+                })
+
+            }
+        )
+    </script>
+    </div>{% endblock %}
