@@ -10,5 +10,4 @@ namespace ForumBundle\Repository;
  */
 class ForumRepository extends \Doctrine\ORM\EntityRepository
 {
-
 }

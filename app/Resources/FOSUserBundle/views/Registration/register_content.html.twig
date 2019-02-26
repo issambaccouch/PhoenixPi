@@ -6,9 +6,16 @@
 
                   {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
         <div class="box-content">
-            <h4 class="heading-primary text-uppercase mb-3">Register An Account</h4>
             <div class="form-row">
                 <div class="form-group col">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <h4 class="heading-primary text-uppercase mb-3">You Already Connected</h4>
+
+                    {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <h4 class="heading-primary text-uppercase mb-3">You Already Connected</h4>
+                    {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                    <h4 class="heading-primary text-uppercase mb-3">Register An Account</h4>
+
                     {{ form_row(form.Nom) }}
                 </div>
             </div>
@@ -16,37 +23,12 @@
                     <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary float-right mb-5" data-loading-text="Loading..." />
                   {{ form_end(form) }}
                 </div>
+        {% endif %}
         </div>
     </div>
 </div>
 </div>
 
-<div class="box-content">
-    <h4 class="heading-primary text-uppercase mb-3">Register An Account</h4>
-    <form action="/" id="frmSignUp" method="post">
-        <div class="form-row">
-            <div class="form-group col">
-                <label>E-mail Address</label>
-                <input type="text" value="" class="form-control form-control-lg">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-lg-6">
-                <label>Password</label>
-                <input type="password" value="" class="form-control form-control-lg">
-            </div>
-            <div class="form-group col-lg-6">
-                <label>Re-enter Password</label>
-                <input type="password" value="" class="form-control form-control-lg">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <input type="submit" value="Register" class="btn btn-primary float-right mb-5" data-loading-text="Loading...">
-            </div>
-        </div>
-    </form>
-</div>
 
  <!--   <h3 class="card-title text-center font-weight-bold">Registration</h3>
     <input type="text" id="Prenom" name="_Prenom" required="required" class="form-control" type="text" placeholder="Prenom">

@@ -3,8 +3,12 @@
 {% block title %}{{ forum.name }}{% endblock %}
 
 {% block body %}
+
+
     <h1 class="text-center">{{ forum.name }} <small>({{ pagination.getTotalItemCount }} topics)</small></h1>
     <p class="text-center">{{ forum.description }}</p>
+   <input type="text" class="form-control" placeholder="rechercher par Nom :" id="recherche" name="evenementrecherche" style="width: 200px">
+    <div class="searching">
     {{ knp_pagination_render(pagination) }}
       {% for topic in pagination %}
         <div class="list-group-item" id="Topic{{ topic.id }}">
@@ -44,11 +48,12 @@
               </a>
             </div>
           </div>
+
           {% if is_granted('ROLE_MODERATOR') %}  
             <div class="row admin">
               <ul class="pull-right list-inline">
                 <li><a id="{{ topic.id }}" class="editAction" href="{{ path("forum_topic_edit", {'id': topic.id}) }}"><i class="glyphicon glyphicon-edit"></i> {{ 'forum.edit'|trans }}</a></li>
-                <li><a href="{{ path('forum_topic_delete', {'id': topic.id}) }}"><i class="glyphicon glyphicon-remove"></i> {{ 'forum.remove'|trans }}</a></li>  
+                <li><a href="{{ path('forum_topic_delete', {'id': topic.id}) }}"><i class="glyphicon glyphicon-remove"></i> {{ 'forum.remove'|trans }}</a></li>
               </ul>
             </div>
           {% endif %}
@@ -57,9 +62,14 @@
         <div class="list-group-item text-center"><h5>{{ 'forum.null'|trans }}</h5></div>
       {% endfor %}
  
-
   {{ knp_pagination_render(pagination) }}
-  {% if form is not null %}
+    </div>
+    {% if form is not null %}
     {% include 'ForumBundle:Form:Topic.html.twig' %}
   {% endif %}
 {% endblock %}
+{% block javascripts %}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
+    </script>
+{% endblock  %}

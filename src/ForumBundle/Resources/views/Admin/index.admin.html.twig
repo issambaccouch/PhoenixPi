@@ -32,6 +32,8 @@
             <div class="forums">
               <h5>{{ 'forum.forum.incat'|trans }} {{ category.name  }}</h5>
               <br />
+                  <input type="text" class="form-control" name="nom" id="cle" placeholder="Search..." required="">
+              </div>
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -42,7 +44,7 @@
                     <th>{{ 'forum.action'|trans }}</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="" >
                 {% for forum in category.forums %}
                   <tr>
                     <td>{{ forum.name }}</td>
@@ -54,10 +56,8 @@
                 {% endfor %}
                 </tbody>
               </table>
-            </div>
           </li>
           {% endfor %}
-
           <li class="viewall">
             <a class="tip-top" href="{{ path('forum_create_category') }}"> {{ 'forum.category.createnew'|trans }} </a>
           </li>
@@ -66,4 +66,5 @@
     </div>
   </div>
 </div>
+  {% include '' %}
 {% endblock %}

@@ -1,0 +1,44 @@
+{% extends "@Forum/layout.html.twig" %}
+{% block body %}
+<input type="text" name="nom" id="cle"  placeholder="Rechercher" >
+<table>
+    <tbody id="tb">
+    {% for post in cats %}
+        <tr>
+            <td>
+                <center> {{ post.id }}</center>
+            </td>
+            <td>
+                <center>{{ post.cat }}</center>
+            </td>
+            <td>
+                <center>{{ post.content }}</center>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<script src="{{ asset('jquery.js') }}"></script>
+<script>
+
+    $('#cle').keyup(
+        function () {
+            var input=$('#cle').val();
+            $.ajax({
+                url:'{{path('searchcomment')}}',
+                type:'POST',
+                data:{'nom':input},
+                success:function(data,xhr){
+                    $('#tb').empty();
+                    $.each(data,function (i,ele){
+                        $('#tb').append(
+                            "<tr bgcolor='#00bfff'>"+
+                            "<td>"+ele.id+"</td>"+
+                            "<td>"+ele.content+"</td>"+
+                            "</tr>"
+                        )
+                    })}
+            })
+        }
+    )
+</script>
+{% endblock %}

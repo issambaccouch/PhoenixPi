@@ -3,14 +3,19 @@
 namespace ForumBundle\Controller;
 
 use ForumBundle\Controller\Base\BaseController;
+use ForumBundle\ForumBundle;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use ForumBundle\Entity\Category;
 use ForumBundle\Entity\Forum;
 use ForumBundle\Form\Type\ForumType;
 use ForumBundle\Form\Type\Remover\RemoveForumType;
+use ForumBundle\Repository\ForumRepository ;
 
 /**
  * ForumController 
@@ -32,8 +37,8 @@ class ForumController extends BaseController
     {
         $categories = $this->getEm()
             ->getRepository(Category::class)
-            ->findBy(array(), array('position' => 'asc', ))
-        ;
+            ->findBy(array(), array('position' => 'asc', ));
+
 
         return $this->render('@Forum/index.html.twig', array(
             'categories' => $categories
@@ -44,7 +49,6 @@ class ForumController extends BaseController
      * @Route("/forum/new/{id}", name="forum_create_forum")
      * @ParamConverter("category")
      * @Security("is_granted('ROLE_ADMIN')")
-     *
      * @param Request $request
      * @param Category $category
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -53,11 +57,8 @@ class ForumController extends BaseController
     {
         $forum = new Forum();
         $forum->setCategory($category);
-        
         $form = $this->createForm(ForumType::class, $forum);
-
         $form->handleRequest($request);
-        
         if (($form->isSubmitted()) && ($form->isValid())) 
         {
             $em = $this->getEm();
@@ -84,9 +85,7 @@ class ForumController extends BaseController
     public function editForumAction(Request $request, Forum $forum)
     {
         $form = $this->createForm(ForumType::class, $forum);
-
         $form->handleRequest($request);
-        
         if (($form->isSubmitted()) && ($form->isValid())) 
         {
             $em = $this->getEm();
@@ -120,9 +119,7 @@ class ForumController extends BaseController
         {
             if ($form->getData()['purge'] === false) {
                 $newFor = $em->getRepository(Forum::class)->find($form->getData()['movedTo']) ;
-                
                 foreach ($forum->getTopics() as $topic) { $topic->setForum($newFor); }
-                
                 $em->flush();
                 $em->clear();
                 $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('forum.forum.movedtopics'));
@@ -141,4 +138,6 @@ class ForumController extends BaseController
             'form' => $form->createView()
         ));
     }
+
+
 }

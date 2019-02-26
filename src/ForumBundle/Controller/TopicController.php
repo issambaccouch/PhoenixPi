@@ -43,7 +43,6 @@ class TopicController extends BaseTopicController
                 $em->persist($this->topic);
                 $em->persist($post);
                 $em->flush();
-
                 $request->getSession()->getFlashBag()->add('success', $this->getTranslator()->trans('forum.topic.create'));
                 return $this->redirect($this->generateUrl('forum_post', array('slug' => $this->topic->getSlug())));
             }
@@ -57,6 +56,7 @@ class TopicController extends BaseTopicController
             'form' => $form
         ));
     }
+
 
     /**
      * @Route("/topic/delete/{id}", name="forum_topic_delete")

@@ -32,11 +32,9 @@ class BasePostController extends BaseController
             $this->post->setTopic($topic);
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $this->post->setPoster($user);
-
             if ( ($quote = $request->query->getInt('quote')) ) {
                 $this->post->setContent( $this->addQuote($quote) );
             }
-            
             return $this->createForm(PostType::class, $this->post, array( 
                 'preview' => $this->container->getParameter('forum.preview')
             ));
@@ -84,7 +82,6 @@ class BasePostController extends BaseController
     }
 
     /**
-     * Check if preview is clicked
      *
      * @param Request $request
      * @param Form $form
@@ -104,7 +101,6 @@ class BasePostController extends BaseController
     }
 
     /**
-     * Find and inject post quoted if post is not null
      *
      * @param $quote
      * @return null|string

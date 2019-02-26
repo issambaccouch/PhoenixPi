@@ -31,7 +31,6 @@ class AdminController extends BaseController
             $forums = NULL;
             $categories = NULL;
         }
-
         return $this->render('@Forum/Moderator/index.moderator.html.twig', array(
             'posts' => $posts,
             'topics' => $topics,

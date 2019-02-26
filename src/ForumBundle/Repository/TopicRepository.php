@@ -16,7 +16,6 @@ use ForumBundle\Entity\Forum;
 class TopicRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * infos: Find lastTopics list
      *
      * @param int $limit
      * @return array $lastTopics
@@ -32,18 +31,16 @@ class TopicRepository extends \Doctrine\ORM\EntityRepository
         
         return $lastTopics;
     }
-    
+
     /**
-     * infos: Find lastTopics list
      *
      * @param class ForumBundle\Entity\Forum $forum
      * @return array $forumsList
      */
     public function findAllByForumOrderedByDate(Forum $forum, $order = 'DESC')
     {
-        
+
         $qb = $this->createQueryBuilder('t');
-   
         $qb->where('t.forum = :forum')
            ->setParameter('forum', $forum)
            ->join('t.posts', 'p')
@@ -52,4 +49,13 @@ class TopicRepository extends \Doctrine\ORM\EntityRepository
     
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     *
+     * @param class ForumBundle\Entity\Forum $forum
+     * @return array $forumsList
+     */
+
+
+
 }

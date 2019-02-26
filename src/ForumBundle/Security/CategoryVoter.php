@@ -59,8 +59,7 @@ class CategoryVoter extends Voter
 
     /**
      * 
-     * Control if user's is autorized to Read category
-     * 
+     *
      * @param Category $category
      * @param TokenInterface $token
      * @return boolean

@@ -15,7 +15,6 @@ namespace ForumBundle\Repository;
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * infos: Update LastPost on postPersist
      *
      * @param int $limit
      * @return array $lastPosts (List of last posts)
@@ -46,6 +45,13 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
            ->addOrderBy("p.updated", 'DESC')
            ->setMaxResults($limit);
         return $qb->getQuery()->getResult();
+    }
+
+    public function FindByNom($nom)
+    {
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT a from ForumBundle:Post a where a.content LIKE '$nom%' ");
+        return $query->getResult();
     }
 
 }
