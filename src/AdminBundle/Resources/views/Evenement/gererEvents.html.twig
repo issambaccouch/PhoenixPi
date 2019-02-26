@@ -9,18 +9,28 @@
 
             <h2 class="card-title" align="center">EVENEMENTS</h2>
         </header>
+        <div class="header-search d-none d-md-block" >
+            <form  method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="nom" id="cle" placeholder="Search..." required="">
+                    <span class="input-group-btn">
+													<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+												</span>
+                </div>
+            </form>
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="mb-3">
                         <button id="addToTable" class="btn btn-primary"><a href="{{path('add_events_admin')}}" style="color: #fafffb">Ajouter evenement</a> <i class="fa fa-plus"></i></button>
-                        <button class="btn btn-primary"><a href="{{path('add_events_admin')}}" style="color: #fafffb">A approuver</a></button>
-                        <button class="btn btn-primary"><a href="{{path('add_events_admin')}}" style="color: #fafffb">En cours</a></button>
-                        <button class="btn btn-primary"><a href="{{path('add_events_admin')}}" style="color: #fafffb">Archive</a></button>
+                        <button class="btn btn-primary"><a href="{{path('gerer_events_AValider_admin')}}" style="color: #fafffb">A approuver</a></button>
+                        <button class="btn btn-primary"><a href="{{path('gerer_events_EnCours_admin')}}" style="color: #fafffb">En cours</a></button>
+                        <button class="btn btn-primary"><a href="{{path('gerer_events_Archive_admin')}}" style="color: #fafffb">Archive</a></button>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+            <table class="table table-bordered table-striped mb-0" id="t">
                 <thead>
                 <tr>
                     <th>Nom</th>
@@ -85,4 +95,34 @@
             </table>
         </div>
     </section>
-    </div>{% endblock %}
+    </div>
+
+    <script src="{{ asset('jquery.js') }}"></script><!--pour l'importation du bibliotheque jquery  -->
+    <script>
+        $('#cle').keyup(
+            function () {
+                var input=$('#cle').val();
+                $.ajax({url:"{{ path ('gerer_events_admin')}}",
+                    type:'POST',data:{'nom':input},
+                    success:function (data) {console.log(data);
+                        $('#t').empty();
+                        $.each(data,function ( i,ele) {
+                            $('#t').append(
+                                "<tr >"+
+                                "<td>"+ele.nomev+"</td>"+
+                                "<td>"+ele.lieu+"</td>"+
+                                "<td>"+ele.nbrparticipants+"</td>"+
+                                "<td>"+"</td>"+
+                                "<td>"+"</td>"+
+                                "<td>"+ "</td>"+
+                                "</tr>"
+                            )
+
+                        })}
+
+                })
+
+            }
+        )
+    </script>
+{% endblock %}

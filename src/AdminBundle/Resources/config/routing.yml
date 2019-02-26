@@ -6,6 +6,18 @@ gerer_events_admin:
     path:     /admin/gererevents
     defaults: { _controller: AdminBundle:Evenement:read }
 
+gerer_events_EnCours_admin:
+    path:     /admin/gerereventsEnCours
+    defaults: { _controller: AdminBundle:Evenement:readEnCours }
+
+gerer_events_Archive_admin:
+    path:     /admin/gerereventsArchive
+    defaults: { _controller: AdminBundle:Evenement:readArchive }
+
+gerer_events_AValider_admin:
+    path:     /admin/gerereventsAValider
+    defaults: { _controller: AdminBundle:Evenement:readAValider }
+
 delete_events_admin:
     path:     /admin/deleteevents/{id}
     defaults: { _controller: AdminBundle:Evenement:delete }
@@ -31,10 +43,14 @@ add_promo_admin:
     defaults: { _controller: AdminBundle:Promotion:ajouter }
 
 delete_promo_admin:
-    path:     /admin/deletepromo
+    path:     /admin/deletepromo/{id}
     defaults: { _controller: AdminBundle:Promotion:delete }
 
 update_promo_admin:
-    path:     /admin/updatepromo
+    path:     /admin/updatepromo/{id}
     defaults: { _controller: AdminBundle:Promotion:update }
+
+statistique:
+    path:     /admin/statistique
+    defaults: { _controller: AdminBundle:Evenement:statistique }
 

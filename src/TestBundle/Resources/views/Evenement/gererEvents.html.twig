@@ -12,7 +12,7 @@
         <div class="header-search d-none d-md-block" >
             <form  method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="titre" id="q" placeholder="Search..." required="">
+                    <input type="text" class="form-control" name="nom" id="cle" placeholder="Search..." required="">
                     <span class="input-group-btn">
 													<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
 												</span>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+            <table class="table table-bordered table-striped mb-0" id="t">
                 <thead>
                 <tr>
                     <th>Nom</th>
@@ -55,4 +55,33 @@
             </table>
         </div>
     </section>
-    </div>{% endblock %}
+    </div>
+    <script src="{{ asset('jquery.js') }}"></script><!--pour l'importation du bibliotheque jquery  -->
+    <script>
+        $('#cle').keyup(
+            function () {
+                var input=$('#cle').val();
+                $.ajax({url:"{{ path ('gerer_events')}}",
+                    type:'POST',data:{'nom':input},
+                    success:function (data) {console.log(data);
+                        $('#t').empty();
+                        $.each(data,function ( i,ele) {
+                            $('#t').append(
+                                "<tr >"+
+                                "<td>"+ele.nomev+"</td>"+
+                                "<td>"+ele.lieu+"</td>"+
+                                "<td>"+ele.nbrparticipants+"</td>"+
+                                "<td>"+new Date(ele.datedebut.timestamp * 1000)+"</td>"+
+                                "<td>"+new Date(ele.datefin.timestamp * 1000)+"</td>"+
+                                "<td>"+"</td>"+
+                                "</tr>"
+                            )
+
+                        })}
+
+                })
+
+            }
+        )
+    </script>
+{% endblock %}

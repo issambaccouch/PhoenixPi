@@ -13,7 +13,7 @@ class EvenementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nomev')->add('datedebut')->add('datefin')->add('imageev')->add('description')->add('nbrparticipants')->add('lieu');
+        $builder->add('nomev')->add('datedebut')->add('datefin')->add('description')->add('nbrparticipants')->add('lieu');
     }/**
      * {@inheritdoc}
      */

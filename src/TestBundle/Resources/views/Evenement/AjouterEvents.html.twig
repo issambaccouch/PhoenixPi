@@ -1,9 +1,20 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <center>
-        <h1>Ajouter un evenement</h1>
+        <h1 style="color: #00A0D1" ><u>Ajouter un evenement</u></h1>
         {{ form_start(form) }}
-        <input type="submit" value="Ajouter">
+        <table>
+            <tr><td>Nom Evenement</td><td>{{ form_widget(form.nomev) }}</td></tr>
+            <tr><td>Date debut </td><td>{{ form_widget(form.datedebut) }}</td></tr>
+            <tr><td>Date fin </td><td>{{ form_widget(form.datefin) }}</td></tr>
+            <tr><td>Lieu</td><td>{{ form_widget(form.lieu) }}</td></tr>
+            <tr><td>Nombre de place</td><td>{{ form_widget(form.nbrparticipants) }}</td></tr>
+            <tr><td>Description</td><td>{{ form_widget(form.description) }}</td></tr>
+
+
+
+        </table>
+        <br><input type="submit" id="_submit" name="_submit" value="Ajouter" class="btn btn-primary  mb-3"></br>
         {{ form_end(form) }}
 
     </center>

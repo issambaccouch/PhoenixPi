@@ -34,7 +34,8 @@
             <link rel="stylesheet" href="{{asset('styling/css/custom.css')}}">
 
             <!-- Head Libs -->
-            <script src="{{asset('styling/vendor/modernizr/modernizr.min.js')}}"></script>{% endblock %}
+            <script src="{{asset('styling/vendor/modernizr/modernizr.min.js')}}"></script>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <div class="body">
@@ -94,7 +95,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="nav-link" href="/ecoforum">
+                                                    <a class="nav-link" href="demos.html">
                                                         Forum
                                                     </a>
                                                 </li>
@@ -103,10 +104,22 @@
                                                         WorkShop
                                                     </a>
                                                 </li>
-                                                <li class="">
-                                                    <a class="nav-link" href="demos.html">
-                                                        Events
+                                                <li class="dropdown ">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        Evenement
                                                     </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="consultevents">
+                                                                consulter les evenements
+                                                            </a>
+                                                            <a class="dropdown-item" href="gererevents">
+                                                                gerer mes evenements
+                                                            </a>
+                                                            <a class="dropdown-item" href="gererpromo">
+                                                                gerer mes promotions
+                                                            </a>
+                                                    </ul>
                                                 </li>
                                                 <li class="">
                                                     <a class="nav-link" href="demos.html">
@@ -114,7 +127,12 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="nav-link" href="/login">
+                                                    <a class="nav-link" href="register">
+                                                        Register
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a class="nav-link" href="login">
                                                         <i class="fa fa-user"></i> Sign In
                                                     </a>
                                                 </li>
@@ -192,11 +210,7 @@
         <div class="footer-copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-1">
-                        <a href="index.html" class="logo">
-                            <img alt="Porto Website Template" class="img-fluid" src="img/logo-footer.png">
-                        </a>
-                    </div>
+
                     <div class="col-lg-7">
                         <p>© Copyright 2017. All Rights Reserved.</p>
                     </div>
@@ -212,4 +226,29 @@
                 </div>
             </div>
         </div>
-    </footer></html>{% endblock %}
+    </footer>
+    <!-- Vendor -->
+    <script src="{{asset('styling/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery.appear/jquery.appear.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery-cookie/jquery-cookie.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/popper/umd/popper.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/common/common.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery.validation/jquery.validation.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery.gmap/jquery.gmap.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/jquery.lazyload/jquery.lazyload.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/isotope/jquery.isotope.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('styling/vendor/vide/vide.min.js')}}"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="{{asset('styling/js/theme.js')}}"></script>
+
+    <!-- Theme Custom -->
+    <script src="{{asset('styling/js/custom.js')}}"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="{{asset('styling/js/theme.init.js')}}"></script></html>{% endblock %}

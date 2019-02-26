@@ -9,6 +9,16 @@
 
             <h2 class="card-title" align="center">PROMOTIONS</h2>
         </header>
+        <div class="header-search d-none d-md-block" >
+            <form  method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="nom" id="cle" placeholder="Search..." required="">
+                    <span class="input-group-btn">
+													<button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+												</span>
+                </div>
+            </form>
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6">
@@ -17,11 +27,12 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+            <table class="table table-bordered table-striped mb-0" id="t">
                 <thead>
                 <tr>
                     <th>Pourcentage</th>
-                    <th>date fin</th>
+                    <th>Date fin</th>
+                    <th>Produit</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -30,6 +41,7 @@
                     <tr data-item-id="1">
                         <td> {{ promotion.pourcentage}} </td>
                         <td>{{ promotion.datefinpro|date }}</td>
+                        <td>{{ promotion.idpr.nomp }}</td>
                         <td class="actions">
                             <a href="{{ path('update_promo',{'id':promotion.idpromo}) }}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
                             <a  href="{{ path('delete_promo',{'id':promotion.idpromo}) }}" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
@@ -39,4 +51,32 @@
             </table>
         </div>
     </section>
-    </div>{% endblock %}
+    </div>
+
+    <script src="{{ asset('jquery.js') }}"></script><!--pour l'importation du bibliotheque jquery  -->
+    <script>
+        $('#cle').keyup(
+            function () {
+                var input=$('#cle').val();
+                $.ajax({url:"{{ path ('gerer_promo')}}",
+                    type:'POST',data:{'nom':input},
+                    success:function (data) {console.log(data);
+                        $('#t').empty();
+                        $.each(data,function ( i,ele) {
+                            $('#t').append(
+                                "<tr >"+
+                                "<td>"+ele.pourcentage+"</td>"+
+                                "<td>"+new Date(ele.datefinpro.timestamp * 1000)+"</td>"+
+                                "<td>"+ele.idpr.nomp+"</td>"+
+                                "<td>"+"</td>"+
+                                "</tr>"
+                            )
+
+                        })}
+
+                })
+
+            }
+        )
+    </script>
+{% endblock %}

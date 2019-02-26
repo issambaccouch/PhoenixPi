@@ -13,11 +13,15 @@
                         <h1 class="mb-0"><strong>Evenements</strong></h1>
                     </div>
                 </div>
-                {% for evenement in evenements%}
                 <div class="masonry-loader masonry-loader-showing">
-
                     <div class="row products product-thumb-info-list mt-3" data-plugin-masonry>
+                        {% for evenement in evenements%}
                         <div class="col-12 col-sm-6 col-lg-3 product">
+                            {% if (evenement.nbrparticipants==0) %}
+                            <a>
+                                <span class="onsale">Full !</span>
+                            </a>
+                                {% endif %}
 								<span class="product-thumb-info">
 									<a href="shop-cart.html" class="add-to-cart-product">
 									</a>
@@ -26,7 +30,7 @@
 											<span class="product-thumb-info-act">
 												<span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
 											</span>
-											<img alt="" class="img-fluid" src="{{asset('styling/img/products/product-2.jpg')}}">
+											<img alt="" class="img-fluid" src="{{asset('event.png')}}">
 										</span>
 									</a>
 									<span class="product-thumb-info-content">
@@ -39,9 +43,10 @@
 									</span>
 								</span>
                         </div>
+                        {% endfor %}
                     </div>
+
                 </div>
-                {% endfor %}
                 <div class="row">
                     <div class="col">
                         <ul class="pagination float-right">

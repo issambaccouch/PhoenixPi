@@ -1,8 +1,14 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <h1>Modification</h1>
-    {{ form_start(form) }}
-    <input type="submit" value="Modifier">
-    {{ form_end(form) }}
-
+    <center>
+        <h1 style="color: #00A0D1" ><u>Modifier une promotion</u></h1>
+        {{ form_start(form) }}
+        <table>
+            <tr><td>Pourcentage</td><td>{{ form_widget(form.pourcentage) }}</td></tr>
+            <tr><td>Date fin Promotion </td><td>{{ form_widget(form.datefinpro) }}</td></tr>
+            <tr><td>Produit </td><td>{{ form_widget(form.idpr) }}</td></tr>
+        </table>
+        <br><input type="submit" id="_submit" name="_submit" value="Ajouter" class="btn btn-primary  mb-3"></br>
+        {{ form_end(form) }}
+    </center>
 {% endblock %}

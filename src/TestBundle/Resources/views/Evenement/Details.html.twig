@@ -1,13 +1,15 @@
 {% extends "base.html.twig" %}
     {% block body %}
+        <center>
+        <div class="row">
+        <div class="col-lg-9">
         <div class="row">
             <div class="col-lg-6">
 
-                <div class="owl-carousel owl-theme" data-plugin-options="{'items': 1, 'margin': 10}">
                     <div>
-                        <img alt="" height="300" class="img-fluid" src="{{asset('styling/img/products/product-7-3.jpg')}}">
+                        <img alt="" height="300" class="img-fluid" src="{{ asset('event.png')}}">
                     </div>
-                </div>
+
 
             </div>
 
@@ -27,12 +29,18 @@
                         <strong class="rating">Date fin:</strong><span class="amount">{{ evenement.datefin|date }}</span>
                     </p>
 
-                    <p class="mb-5">{{ evenement.description }} </p>
+                    <p class="mb-5"> <strong class="rating">Description:</strong><span class="amount">{{ evenement.description }} </p>
 
-
+                   <p> {{ ivory_google_map(map) }}
+                    {{ ivory_google_api([map]) }}</p>
+                    {% if (evenement.nbrparticipants>0) %}
                         <button  class="btn btn-primary pt-2 pb-2 pr-3 pl-3"><a href="{{path('participer_events',{'id':evenement.idev})}}" style="color: #fafffb">Participer</a></button>
+                    {% endif %}
 
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </center>
 {% endblock %}

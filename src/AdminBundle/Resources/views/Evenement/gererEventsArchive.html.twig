@@ -1,0 +1,53 @@
+{% extends "adminbase.html.twig" %}
+{% block body %}
+
+
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+
+
+            <h2 class="card-title" align="center">EVENEMENTS</h2>
+        </header>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <button id="addToTable" class="btn btn-primary"><a href="{{path('add_events_admin')}}" style="color: #fafffb">Ajouter evenement</a> <i class="fa fa-plus"></i></button>
+                        <button class="btn btn-primary"><a href="{{path('gerer_events_AValider_admin')}}" style="color: #fafffb">A approuver</a></button>
+                        <button class="btn btn-primary"><a href="{{path('gerer_events_EnCours_admin')}}" style="color: #fafffb">En cours</a></button>
+                        <button class="btn btn-primary"><a href="{{path('gerer_events_Archive_admin')}}" style="color: #fafffb">Archive</a></button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Lieu</th>
+                    <th>Capacite</th>
+                    <th>Date de debut</th>
+                    <th>Date de fin</th>
+                    <th>Actions </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for evenement in evenements%}
+                    <tr data-item-id="1">
+                        <td bgcolor="yellow"> {{ evenement.nomev }}  </td>
+                        <td bgcolor="yellow">{{ evenement.lieu }}</td>
+                        <td bgcolor="yellow">{{ evenement.nbrparticipants }}</td>
+                        <td bgcolor="yellow">{{ evenement.datedebut|date }}</td>
+                        <td bgcolor="yellow">{{ evenement.datefin|date }}</td>
+                        <td class="actions" bgcolor="yellow">
+
+                            <a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+                            <a href="{{ path('update_events_admin',{'id':evenement.idev}) }}" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                            <a  href="{{ path('delete_events_admin',{'id':evenement.idev}) }}" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </section>
+    </div>{% endblock %}

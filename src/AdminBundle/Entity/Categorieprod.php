@@ -29,5 +29,38 @@ class Categorieprod
     private $nomcp;
 
 
-}
 
+    /**
+     * Get idcp
+     *
+     * @return integer
+     */
+    public function getIdcp()
+    {
+        return $this->idcp;
+    }
+
+    /**
+     * Set nomcp
+     *
+     * @param string $nomcp
+     *
+     * @return Categorieprod
+     */
+    public function setNomcp($nomcp)
+    {
+        $this->nomcp = $nomcp;
+
+        return $this;
+    }
+
+    /**
+     * Get nomcp
+     *
+     * @return string
+     */
+    public function getNomcp()
+    {
+        return $this->nomcp;
+    }
+}

@@ -4,19 +4,36 @@ namespace TestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use TestBundle\Entity\Produit;
 use TestBundle\Entity\Promotion;
 use TestBundle\Entity\FosUser;
 use TestBundle\Form\PromotionType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class PromotionController extends Controller
 {
 
-    public function readAction()
+    public function readAction(Request $request)
     {
         // parcourir la base de donne
         $user=new FosUser();
-        $user = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
-        $promos=$this->getDoctrine()->getRepository(Promotion::class)->findByiduser($user) ;//getdoctrine permet d'acceder au donner de la base de donnee tandis que getrepostory est utiliser pour lire des donnees de la base de donnee elle utiliser lorsque la fonction read et la methode findall() permet de lire tout les donnee de la table desirer
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if (is_string($user))
+        { return $this->redirectToRoute('fos_user_security_login');}
+        else {
+            $promos = $this->getDoctrine()->getRepository(Promotion::class)->findByiduser($user->getId());//getdoctrine permet d'acceder au donner de la base de donnee tandis que getrepostory est utiliser pour lire des donnees de la base de donnee elle utiliser lorsque la fonction read et la methode findall() permet de lire tout les donnee de la table desirer
+            if ($request->isXmlHttpRequest()) {
+                $nom = $request->get('nom');
+                $promotions = $this->getDoctrine()->getRepository(Promotion::class)->findByproduit($nom);
+                //inisialisation de serializer
+                $se = new Serializer(array(new ObjectNormalizer()));
+                //normalisation de la liste
+                $data = $se->normalize($promotions);
+                return new  JsonResponse($data);
+            }
+        }
         return $this->render('@Test\Promotion\gererPromo.html.twig', array(
             'promos'=>$promos
         ));
@@ -45,10 +62,10 @@ class PromotionController extends Controller
             $em->persist($promotion);
             //sauvgarde les donnees dans la db
             $em->flush();
-
+            $this->getDoctrine()->getManager()->getRepository(Produit::class)->produitEnPromo($promotion->getIdpr()->getIdpr(),$promotion->getPourcentage());
             return $this->redirectToRoute('gerer_promo');
-        }
 
+        }
         return $this->render('@Test\Promotion\AjouterPromo.html.twig', array(
             'form'=>$form->createView()
 
@@ -58,9 +75,9 @@ class PromotionController extends Controller
 
     public function deleteAction($id)
     {
-
         $em=$this->getDoctrine()->getManager();
         $promotion=$em->getRepository(Promotion::class)->find($id);
+        $this->getDoctrine()->getManager()->getRepository(Produit::class)->produitNonPromo($promotion->getIdpr()->getIdpr());
         $em->remove($promotion);
         $em->flush();
         return $this->redirectToRoute('gerer_promo');
@@ -84,7 +101,7 @@ class PromotionController extends Controller
         {
             $em=$this->getDoctrine()->getManager();
             $em->flush();
-
+            $this->getDoctrine()->getManager()->getRepository(Produit::class)->produitEnPromo($promotion->getIdpr()->getIdpr(),$promotion->getPourcentage());
             return $this->redirectToRoute('gerer_promo');
         }
 

@@ -12,8 +12,83 @@ class EvenementRepository extends \Doctrine\ORM\EntityRepository
 {
     public function approuvereEtat($id)
     {
-        $query = $this->getEntityManager()->createQuery("update TestBundle:Evenement e set e.etatev =1 where e.idev='$id'");
+        $query = $this->getEntityManager()->createQuery("update AdminBundle:Evenement e set e.etatev =1 where e.idev='$id'");
         $query->execute();
     }
+
+    public function EventsEnCours()
+    {
+        $query=$this->getEntityManager()->createQuery("select e from AdminBundle:Evenement e WHERE e.etatev=1 ");
+        return $query->getResult();
+    }
+
+
+    public function distinctUsers()
+    {
+        $query=$this->getEntityManager()->createQuery("select e.idev from AdminBundle:Evenement e");
+        return $query->getResult();
+    }
+
+
+    public function NombreDesEvenements()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('AdminBundle:Evenement', 'e');
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+
+    public function NombreDesEvenementsArchiver()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('AdminBundle:Evenement', 'e')->where('e.etatev=-1');
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+
+    public function NombreDesEvenementsEnCours()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('AdminBundle:Evenement', 'e')->where('e.etatev=1');
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+
+
+    public function NombreDesEvenementsAValider()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('COUNT(e)')
+            ->from('AdminBundle:Evenement', 'e')->where('e.etatev=0');
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    public function EventsAValider()
+    {
+        $query=$this->getEntityManager()->createQuery("select e from AdminBundle:Evenement e WHERE e.etatev=0 ");
+        return $query->getResult();
+    }
+
+
+    public function EventsArchiver()
+    {
+        $query=$this->getEntityManager()->createQuery("select e from AdminBundle:Evenement e WHERE e.etatev=-1 ");
+        return $query->getResult();
+    }
+
+
+    public function updateEtat($date)
+    {
+        $query = $this->getEntityManager()->createQuery("update AdminBundle:Evenement e set e.etatev =-1 where e.datefin<'$date'");
+        $query->execute();
+    }
+
 
 }

@@ -20,10 +20,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new TestBundle\TestBundle(),
             new AdminBundle\AdminBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new ForumBundle\ForumBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
