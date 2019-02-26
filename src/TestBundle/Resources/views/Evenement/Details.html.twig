@@ -17,7 +17,7 @@
 
                 <div class="summary entry-summary">
 
-                    <h1 class="mb-0"><strong>{{ evenement.nomev }}</strong></h1>
+                    <h1 class="mb-0"><strong>{{ evenement.nomev }} </strong></h1>
                     <div title="Rated 5.00 out of 5" class="star-rating">
                         <span style="width:100%"><strong class="rating">Nombre de place disponible:</strong>{{ evenement.nbrparticipants }} </span>
                     </div>
@@ -33,7 +33,7 @@
 
                    <p> {{ ivory_google_map(map) }}
                     {{ ivory_google_api([map]) }}</p>
-                    {% if (evenement.nbrparticipants>0) %}
+                    {% if ((evenement.nbrparticipants>0)and(user != "anon.")and(verif=="true")) %}
                         <button  class="btn btn-primary pt-2 pb-2 pr-3 pl-3"><a href="{{path('participer_events',{'id':evenement.idev})}}" style="color: #fafffb">Participer</a></button>
                     {% endif %}
 

@@ -106,17 +106,19 @@
                     type:'POST',data:{'nom':input},
                     success:function (data) {console.log(data);
                         $('#t').empty();
+                        $('#t').append("<tr><th>Nom</th>"+"<th>Lieu</th>"+"<th>Capacite</th>"+"<th>Date debut</th>"+"<th>Date fin</th>"+"<th>Action</th></tr>")
                         $.each(data,function ( i,ele) {
                             $('#t').append(
                                 "<tr >"+
                                 "<td>"+ele.nomev+"</td>"+
                                 "<td>"+ele.lieu+"</td>"+
                                 "<td>"+ele.nbrparticipants+"</td>"+
-                                "<td>"+"</td>"+
-                                "<td>"+"</td>"+
+                                "<td>"+new Date(ele.datedebut.timestamp * 1000)+"</td>"+
+                                "<td>"+new Date(ele.datefin.timestamp * 1000)+"</td>"+
                                 "<td>"+ "</td>"+
                                 "</tr>"
                             )
+
 
                         })}
 

@@ -86,8 +86,6 @@ class Produit
 
 
 
-
-
     /**
      * Get idpr
      *

@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use TestBundle\Entity\Evenement;
 use TestBundle\Entity\FosUser;
+use TestBundle\Entity\Interesser;
 use TestBundle\Form\EvenementType;
 use Ivory\GoogleMap\Map;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -25,7 +26,6 @@ class EvenementController extends Controller
     public function readAction(Request $request)
     {
         // parcourir la base de donne
-        $test=false;
         $user=new FosUser();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
         if (is_string($user))
@@ -65,9 +65,14 @@ class EvenementController extends Controller
         $marker->setOption('flat', true);
         $marker->setStaticOption('location', 'Paris, France');
         $map->getOverlayManager()->addMarker($marker);
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $evenement=$this->getDoctrine()->getManager()->getRepository(Evenement::class)->find($id);
+        $interesser=$this->getDoctrine()->getManager()->getRepository(Interesser::class)->findOneByiduser($user->getId());
+        $verif="false";
+        if (empty($interesser))
+            $verif="true";
         return $this->render('@Test\Evenement\Details.html.twig', array(
-            'evenement'=>$evenement,'map'=>$map
+            'evenement'=>$evenement,'map'=>$map,'user'=>$user,'interesser'=>$interesser,'verif'=>$verif
         ));
     }
 
@@ -177,11 +182,28 @@ class EvenementController extends Controller
         $marker->setOption('flat', true);
         $marker->setStaticOption('location', 'Paris, France');
         $map->getOverlayManager()->addMarker($marker);
+        $interesser=new Interesser();
+        $evenement=new Evenement();
+        $evenement=$this->getDoctrine()->getRepository(Evenement::class)->find($id);
+        $iduser=$this->container->get('security.token_storage')->getToken()->getUser()->getId();
+        $fosuser=$this->getDoctrine()->getManager()->getRepository(FosUser::class)->find($iduser) ;
+        $interesser->setIdev( $evenement);
+        $interesser->setIduser($fosuser);
+        $em = $this->getDoctrine()->getManager();
+        //persister l'objet modele dans l'ORM
+        $em->persist($interesser);
+        //sauvgarde les donnees dans la db
+        $em->flush();
         $this->getDoctrine()->getManager()->getRepository(Evenement::class)->updateNbPartitipation($id);
         $em=$this->getDoctrine()->getManager();
         $evenement=$em->getRepository(Evenement::class)->find($id);
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $interesser=$this->getDoctrine()->getManager()->getRepository(Interesser::class)->findOneByiduser($user->getId());
+        $verif="false";
+        if (empty($interesser))
+            $verif="true";
         return $this->render('@Test\Evenement\Details.html.twig', array(
-            'evenement'=>$evenement,'map'=>$map
+            'evenement'=>$evenement,'map'=>$map,'verif'=>$verif,'user'=>$user
         ));
     }
 

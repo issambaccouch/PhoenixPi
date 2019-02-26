@@ -16,9 +16,9 @@ class Evenement
     /**
      * @var integer
      *
-     * @ORM\Column(name="idev", type="integer")
+     * @ORM\Column(name="idev", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idev;
 

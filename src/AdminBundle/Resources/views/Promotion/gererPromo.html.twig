@@ -61,6 +61,7 @@
                     type:'POST',data:{'nom':input},
                     success:function (data) {console.log(data);
                         $('#t').empty();
+                        $('#t').append("<tr><th>Pourcentage</th>"+"<th>Date fin</th>"+"<th>Produit</th>"+"<th>Action</th></tr>")
                         $.each(data,function ( i,ele) {
                             $('#t').append(
                                 "<tr >"+
