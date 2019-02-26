@@ -1,0 +1,99 @@
+{% extends "base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+    </table>
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+            </div>
+
+            <h2 class="card-title">LISTE DES FORMATEURS</h2>
+            <div class="input-group">
+
+            </div>
+
+
+
+
+        </header>
+
+
+
+
+
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+                <thead>
+                <tr>
+                    <td>
+                        <center>Nom du Formateur</center>
+                    </td>
+
+                    <td>
+                        <center>Prenom du Formateur</center>
+
+                    </td>
+
+                    <td>
+                        <center>Follow/Unfollow</center>
+                    </td>
+
+
+
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for f in foll  %}
+                    <tr>
+                        <td>
+                            <center>  {{ f.nom }}</center>
+                        </td>
+                        <td>
+                            <center>  {{ f.prenom }}</center>
+                        </td>
+
+
+                        <td>
+                            {% set foo = 'follow' %}
+                            {% set fol = 0 %}
+                            {% for w in folws  %}
+                            {% if (w.idadherent.id==app.user.id) and (w.idformateur.id==f.id) %}
+
+                                {% set foo = 'unfollow' %}
+                                {% set fol = w.idfoll %}
+                            {% endif %}
+                            {% endfor %}
+                            <center>
+                                {% if foo=='follow' %}
+                                <a href="{{ path('createf',{'idformateur':f.id}) }}">  <button id={{ f.id  }} class="btn" v> follow</button></a>
+                                {% else %}
+                                    <a href="{{ path('unfollow',{'idfoll':fol}) }}">  <button id={{ f.id  }} class="btn" v> Unfollow</button></a>
+                                {% endif %}
+                            </center>
+
+                    </tr>
+
+                {%endfor%}
+            </table>
+
+
+
+
+        </div>
+
+    </section>
+
+    </div>{% endblock %}
+

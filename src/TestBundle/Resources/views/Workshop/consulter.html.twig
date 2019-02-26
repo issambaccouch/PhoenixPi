@@ -1,0 +1,45 @@
+{% extends "adminbase.html.twig" %}
+{% block body %}
+
+
+    <div class="container">
+        <section class="card card-admin">
+            <header class="card-header">
+
+
+             <center><h2 class="card-title" align="center">LISTE DES WORKSHOPS ARCHIVES</h2></center>
+            </header>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped mb-0" id="t">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Lieu</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for workshop in workshops%}
+                        <tr data-item-id="1">
+
+                                <td > {{ workshop.nomws }}</td>
+                                <td >{{ workshop.lieu }}</td>
+                                <td >{{ workshop.datews|date('Y-m-d') }}</td>
+
+                        </tr>
+                    {%endfor%}
+                </table>
+            </div>
+        </section>
+    </div>
+
+
+{% endblock %}

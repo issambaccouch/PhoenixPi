@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+<html>
+<head>
+</head>
+<body>
+<center > <h1 style="color: #00A0D1" ><u>Ajouter un Workshop</u></h1></center>
+
+<center>
+    {{ form_start(form) }}
+    <table>
+        <tr><td>Nom Workshop</td><td>{{ form_widget(form.nomws) }}</td></tr>
+        <tr><td>Date </td><td>{{ form_widget(form.datews) }}</td></tr>
+        <tr><td>Lieu</td><td>{{ form_widget(form.lieu) }}</td></tr>
+        <tr><td>Nombre</td><td>{{ form_widget(form.nbrws) }}</td></tr>
+        <tr><td>Description</td><td>{{ form_widget(form.description) }}</td></tr>
+        <tr><td>Etat</td><td>{{ form_widget(form.etatws) }}</td></tr>
+        <tr><td>id categorie workshop</td><td>{{ form_widget(form.idcw) }}</td></tr>
+
+    </table>
+    <br><input type="submit" id="_submit" name="_submit" value="Ajouter" class="btn btn-primary  mb-3"></br>
+    {{ form_end(form) }}
+
+</center>
+</body>
+</html>
+{% endblock %}

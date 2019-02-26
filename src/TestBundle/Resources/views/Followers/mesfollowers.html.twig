@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+    </table>
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+            </div>
+
+            <h2 class="card-title">MES FOLLOWERS</h2>
+            <div class="input-group">
+
+            </div>
+
+
+            <a href="http://localhost/pidevtow/web/app_dev.php/listefor"><strong>RETOUR</strong></a>
+
+        </header>
+
+
+
+
+
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+                <thead>
+                <tr>
+                    <td>
+                        <center>Nom du Formateur</center>
+                    </td>
+
+                    <td>
+                        <center>Prenom du Formateur</center>
+                    </td>
+
+
+
+
+
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for f in foll  %}
+                    <tr>
+                        {% if f.idadherent.id==app.user.id %}
+                        {% for u in users  %}
+                        {% if f.idformateur.id==u.id %}
+                        <td>
+                            <center>  {{ u.nom }}</center>
+                        </td>
+                            <td>
+                                <center> {{ u.prenom }}</center>
+                            </td>
+                        {%endif%}
+                        {%endfor%}
+
+                        {%endif%}
+
+
+
+                    </tr>
+                {%endfor%}
+            </table>
+
+
+
+
+        </div>
+
+    </section>
+
+    </div>{% endblock %}
+

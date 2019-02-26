@@ -1,3 +1,75 @@
 test_homepage:
     path:     /
     defaults: { _controller: TestBundle:Default:index }
+
+read:
+    path:     /listedesworkshops
+    defaults: { _controller: TestBundle:Workshop:read }
+
+create:
+    path:     /formateur/create
+    defaults: { _controller: TestBundle:Workshop:create }
+
+update:
+    path:     /formateur/update/{idws}
+    defaults: { _controller: TestBundle:Workshop:update }
+
+delete:
+    path:     /delete/{idws}
+    defaults: { _controller: TestBundle:Workshop:delete }
+
+detail:
+    path:     /detail/{idws}
+    defaults: { _controller: TestBundle:Workshop:detail }
+
+consulter:
+    path:     /admin/consulter
+    defaults: { _controller: TestBundle:Workshop:consulter}
+
+
+createws:
+    path:     /admin/createws
+    defaults: { _controller: TestBundle:CategorieWS:create }
+
+liste:
+    path:     /liste
+    defaults: { _controller: TestBundle:CategorieWS:liste }
+
+updatews:
+    path:     /admin/updatews/{idcw}
+    defaults: { _controller: TestBundle:CategorieWS:update }
+
+
+remove:
+    path:     /admin/remove/{idcw}
+    defaults: { _controller: TestBundle:CategorieWS:remove }
+
+
+listefor:
+    path:     /listefor
+    defaults: { _controller: TestBundle:Followers:listefor }
+
+listews:
+    path:     /listews
+    defaults: { _controller: TestBundle:Followers:listews }
+
+createf:
+    path:     /createf/{idformateur}
+    defaults: { _controller: TestBundle:Followers:createf }
+
+mesfollowers:
+    path:     /mesfollowers
+    defaults: { _controller: TestBundle:Followers:mesfollowers }
+
+unfollow:
+    path:     /removeFol/{idfoll}
+    defaults: { _controller: TestBundle:Followers:removeFol }
+
+participate:
+    path:     /participate/{idws}
+    defaults: { _controller: TestBundle:Participation:participate }
+
+mesparticipations:
+    path:     /mesparticipations
+    defaults: { _controller: TestBundle:Participation:mesparticipations }
+

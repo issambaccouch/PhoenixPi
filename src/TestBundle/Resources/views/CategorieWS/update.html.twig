@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <html>
+    <head>
+    </head>
+    <body>
+    <center > <h1 style="color: #00A0D1" ><u>Modification d'une Categorie Workshop</u></h1></center>
+
+    <center>
+        {{ form_start(form) }}
+        <table>
+            <tr><td>Nom Categorie Workshop</td><td>{{ form_widget(form.nomcws) }}</td></tr>
+
+        </table>
+        <br><input type="submit" id="_submit" name="_submit" value="Modifier" class="btn btn-primary  mb-3"></br>
+        {{ form_end(form) }}
+
+    </center>
+    </body>
+    </html>
+{% endblock %}

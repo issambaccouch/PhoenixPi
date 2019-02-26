@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+
+    {% block body %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+        <div class="row">
+            <div class="col-lg-6">
+
+
+                    <div>
+                        <img alt="" height="160" class="img-fluid" src="{{asset('styling/img/logos/workshop.png')}}">
+                    </div>
+
+            </div>
+
+            
+
+            <div class="col-lg-6">
+
+                <div class="summary entry-summary">
+
+                    <h1 class="mb-0"><strong>{{ w.nomws }}</strong></h1><br>
+
+                    <div title="Rated 5.00 out of 5" class="star-rating">
+                        <span style="width:100%"><strong class="rating">Nom du Workshop :</strong>{{ w.nomws }} </span>
+                    </div><br>
+                    <p class="price">
+                        <strong class="rating">Date :</strong><span class="amount">{{ w.datews|date('Y-m-d') }}</span>
+                    </p>
+                    <p class="price">
+                        <strong class="rating">Lieu :</strong><span class="amount">{{  w.lieu }}</span>
+                    </p>
+
+                    <p class="price">
+                        <strong class="rating">Nombre de places :</strong><span class="amount">{{  w.nbrws }}</span>
+                    </p>
+
+                    <p class="price">
+                        <strong class="rating">Description :</strong><span class="amount"><a href={{ w.description }}> {{ w.description }}</a></span>
+                    </p>
+
+
+
+            {% if is_granted('ROLE_USER') %}
+
+            <button  class="btn btn-primary pt-2 pb-2 pr-3 pl-3"><a href="{{ path('participate',{'idws':w.idws}) }}" style="color: #fafffb">Participer</a></button>
+            {% endif %}
+
+                </div>
+
+        </div>
+    {% endblock %}

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -83,7 +82,7 @@
                                         <nav class="collapse">
                                             <ul class="nav nav-pills" id="mainNav">
                                                 <li class="dropdown">
-                                                    <a class="nav-link" href="/">
+                                                    <a class="nav-link" href="http://localhost/pidevtow/web/app_dev.php">
                                                         Home
                                                     </a>
                                                 </li>
@@ -94,15 +93,38 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="nav-link" href="/ecoforum">
+                                                    <a class="nav-link" href="demos.html">
                                                         Forum
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="nav-link" href="demos.html">
+                                                    <a class="nav-link" href="{{path ('read')}}">
                                                         WorkShop
                                                     </a>
                                                 </li>
+
+                                                <li class="">
+                                                    <a class="nav-link" href="{{path ('liste')}}">
+                                                       CATEGORIES WORKSHOPS
+                                                    </a>
+                                                </li>
+
+                                                <li class="dropdown ">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        FORMATEURS
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="listefor">
+                                                                consulter la liste des formateurs
+                                                            </a>
+
+                                                    </ul>
+                                                </li>
+
+
+
+
                                                 <li class="">
                                                     <a class="nav-link" href="demos.html">
                                                         Events
@@ -114,10 +136,18 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a class="nav-link" href="/login">
+                                                    <a class="nav-link" href="http://localhost/pidevtow/web/app_dev.php/login">
                                                         <i class="fa fa-user"></i> Sign In
                                                     </a>
                                                 </li>
+
+                                                <li class="">
+                                                    <a class="nav-link" href="http://localhost/pidevtow/web/app_dev.php/register">
+                                                        <i class="fa fa-user"></i> Register
+                                                    </a>
+                                                </li>
+
+
 
 
                                             </ul>

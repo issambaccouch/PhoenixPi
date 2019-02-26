@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+    </table>
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+            </div>
+
+            <h2 class="card-title">MES PARTICIPATIONS</h2>
+            <div class="input-group">
+
+            </div>
+
+
+            Pour accéder à la liste des workshops cliquer <a href="http://localhost/pidevtow/web/app_dev.php/listedesworkshops">Ici</a>
+
+        </header>
+
+
+
+
+
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+                <thead>
+                <tr>
+                    <td>
+                        <center>Nom du workshop</center>
+                    </td>
+
+                    <td>
+                        <center>description</center>
+                    </td>
+
+
+
+
+
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for p in part  %}
+                    <tr>
+                        {% if p.idadherent==app.user.id %}
+                            {% for w in works  %}
+                                {% if p.idws==w.idws %}
+                                    <td>
+                                        <center>  {{ w.nomws }}</center>
+                                    </td>
+                                    <td>
+                                        <center> <a href={{ w.description }}> {{ w.description }}</a></center>
+                                    </td>
+                                {%endif%}
+                            {%endfor%}
+
+                        {%endif%}
+
+
+
+                    </tr>
+                {%endfor%}
+            </table>
+
+
+
+
+        </div>
+
+    </section>
+
+    </div>{% endblock %}
+

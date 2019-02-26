@@ -1,0 +1,111 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+            </div>
+
+            <h2 class="card-title">LISTE DES CATEGORIES WORKSHOPS</h2>
+           <div class="input-group">
+
+               </div>
+        </header>
+        <div class="header-search d-none d-md-block" >
+                <div class="input-group">
+                    <input type="text" class="form-control" name="nom" id="cle"  placeholder="Rechercher" r>
+                    <span class="input-group-btn">
+                    </span>
+                </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mb-3">
+    {% if is_granted('ROLE_ADMIN') %}
+
+        <button id="addToTable" class="btn"><a href="{{path('createws')}}">Add CATEGORIE </a> <i class="fa fa-plus"></i></button>
+        {% endif %}
+        </div>
+                </div>
+            </div>
+            <table  class="table table-bordered table-striped mb-0" >
+                <thead>
+                <tr>
+                    <td>
+                        <center>Id</center>
+                    </td>
+                    <td>
+                     <center>Nom du Categorie Workshop</center>
+                    </td>
+
+                {% if is_granted('ROLE_ADMIN') %}
+
+                        <td>
+                       <center>Action</center>
+                    </td>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody id="tb">
+                {% for c in cats  %}
+                    <tr>
+                        <td>
+                          <center>  {{ c.idcw }}</center>
+                        </td>
+
+                        <td>
+                          <center>{{ c.nomcws }}</center>
+                        </td>
+
+                        <td class="actions">
+                            {% if is_granted('ROLE_ADMIN') %}
+
+                            <center><a href="{{ path('updatews',{'idcw':c.idcw}) }}" class="on-default edit-row"><i class="fa fa-pencil"></i></a></center>
+
+                            <center><a  href="{{ path('remove',{'idcw':c.idcw}) }}" class="on-default remove-row"><i class="fa fa-trash-o"></i></a></center>
+                        {% endif %}
+
+                        </td>
+
+
+
+                    </tr>
+
+
+        {%endfor%}
+            </table>
+        </div>
+    </section>
+    <!--pour l'importation du bibliotheque jquery  -->
+        <script src="{{ asset('jquery.js') }}"></script>
+    <script>
+        $('#cle').keyup(
+            function () {
+                var input=$('#cle').val();
+                $.ajax({
+                    url:"{{path('liste')}}",
+                    type:'POST',
+                    data:{'nom':input},
+                    success:function(data){
+                         $('#tb').empty();
+                        $.each(data,function (i,ele){
+                            $('#tb').append(
+                                "<tr bgcolor='#00bfff'>"+
+                                "<td>"+ele.idcw+"</td>"+
+                                "<td>"+ele.nomcws+"</td>"+
+
+                                "</tr>"
+                            )
+
+                        })}
+
+                })
+
+            }
+        )
+    </script>
+</div>
+{% endblock %}
