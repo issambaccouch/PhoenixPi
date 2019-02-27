@@ -36,5 +36,14 @@ class FavorisController extends Controller
         $em->flush();
         return $this->redirectToRoute('read_mesProd');
     }
+    public function StatistiqueAction(){
+        $em=$this->getDoctrine()->getManager();
+        $stat=$em->getRepository(Favoris::class)->NbFavParCat();
+        return $this->render('@Test\Produit\StatFavByCat.html.twig', array(
+            'stat'=>$stat
+        ));
+
+
+    }
 
 }

@@ -18,9 +18,10 @@
                         {% for n in nbr %}
                         <p>Showing 1–6 of {{ n.1 }} results.</p>
                             {% endfor %}
-                        <div class="mb-3">
-                            <button id="addToTable" class="btn"><a href="http://localhost/pidevtow/web/app_dev.php/create_prod">Add Produit</a> <i class="fa fa-plus"></i></button>
-                        </div>
+                        <p>   <button id="addToTable" class="btn"><a href="http://localhost/pidevtow/web/app_dev.php/create_prod">Add Produit</a> <i class="fa fa-plus"></i></button>   <button id="addToTable"  class="btn" ><a href="http://localhost/pidevtow/web/app_dev.php/read_prod_rec">Produits Recommandé</a> <i class="fa fa-font-awesome"></i></button></p>
+                        <button id="addToTable" class="btn"><a href="http://localhost/pidevtow/web/app_dev.php/read_prod">Retour au Produit Home</a> <i class="fa fa-home"></i></button>
+
+
                     </div>
                 </div>
                 <div class="masonry-loader masonry-loader-loaded">
@@ -86,7 +87,7 @@
 
                   <div class="navigation">
 
-                      <h1> <strong class="" > {{ knp_pagination_render(Produits) }}</strong></h1>
+                     <center> <h1> <strong class="" > {{ knp_pagination_render(Produits) }}</strong></h1></center>
 
                   </div>
 
@@ -100,14 +101,35 @@
             <div class="col-lg-3">
                 <aside class="sidebar">
 
-                    <form>
-                        <div class="input-group input-group-4">
-                            <input class="form-control" placeholder="Search..." name="s" id="s" type="text">
-                            <span class="input-group-btn">
-											<button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
-										</span>
-                        </div>
-                    </form>
+
+                    <hr>
+
+                    <h5 class="heading-primary">Categorie</h5>
+
+                    {% for cat in cat %}
+                        {% set break = false %}
+                        <p> <a href="{{ path('myprod_filter',{'idcat':cat.idcp}) }}"><span class="badge badge-dark">{{ cat.nomcp }}</span></a>
+
+                            {% for f in favoris if not break %}
+
+                                {% if f.idcp.idcp==cat.idcp and f.iduser==fos %}
+                                    <button id="addToTable"  class="btn"><a href="{{ path('delete_fav',{'idfav':f.idfav}) }}">Supprimer favoris</a> <i class="fa fa-arrow-down"></i></button>
+                                    {% set break = true %}
+
+
+                                {% endif %}
+                            {% endfor %}
+                            {% if break==false %}
+                                <button id="addToTable"  class="btn"><a href="{{ path('create_fav',{'idcp': cat.idcp}) }}">Ajouter a favoris</a> <i class="fa fa-arrow-up"></i></button>
+                            {% endif %}
+
+                        </p>
+                    {% endfor %}
+
+                    <hr>
+
+
+
 
 
 

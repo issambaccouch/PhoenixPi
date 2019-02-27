@@ -1,0 +1,49 @@
+{% extends "adminbase.html.twig" %}
+{% block body %}
+
+    </table>
+    <div class="container">
+    <section class="card card-admin">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+            </div>
+
+           <center> <h2 class="card-title">Nombre De Favoris Par Categorie </h2></center>
+        </header>
+
+        <div class="card-body">
+
+            <table class="table table-bordered  mb-0" >
+                <thead>
+                <tr>
+                    <td>
+                        Nom Categorie
+                    </td>
+                    <td>
+                        Nombre de Favoris
+                    </td>
+
+
+                </tr>
+
+                </thead>
+                <tbody id="t" >
+                {% for stat in stat  %}
+                    <tr>
+                        <td>
+                            {{ stat.catnom }}
+                        </td>
+
+                        <td>
+                            {{ stat.nbfav }}
+                        </td>
+
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </section>
+
+    </div>{% endblock %}

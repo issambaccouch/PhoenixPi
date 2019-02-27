@@ -75,6 +75,13 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
 
     }
+    public function compterProduitParPrix($prix){
+        $query=$this->getEntityManager()
+            ->createQuery("SELECT count(a) FROM TestBundle:Produit a where a.etatpr=1 AND a.prix='$prix'");
+        return $query->getResult();
+
+    }
+
 
 
 }

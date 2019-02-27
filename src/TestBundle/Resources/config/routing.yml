@@ -69,5 +69,10 @@ create_fav:
 delete_fav:
     path:     /delete_fav/{idfav}
     defaults: { _controller: TestBundle:Favoris:delete }
-
+stat_cat_fav:
+    path:     /admin/stat
+    defaults: { _controller: TestBundle:Favoris:Statistique }
+mail_send:
+    path:     /mail_send/{id}
+    defaults: { _controller: TestBundle:Produit:MailSend }
 

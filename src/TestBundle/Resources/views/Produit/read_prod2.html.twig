@@ -21,7 +21,7 @@
 
                     </div>
                 </div>
-                <div class="masonry-loader masonry-loader-loaded">
+                <div class="masonry-loader masonry-loader-loaded" id="t">
                     <div class="row products product-thumb-info-list mt-3" data-plugin-masonry>
                         {% for produit in Produits %}
 
@@ -84,7 +84,7 @@
 
                   <div class="navigation">
 
-                     <h1> <strong class="" > {{ knp_pagination_render(Produits) }}</strong></h1>
+                    <center> <h1> <strong class="" > {{ knp_pagination_render(Produits) }}</strong></h1></center>
 
                   </div>
 
@@ -100,7 +100,7 @@
 
                     <form>
                         <div class="input-group input-group-4">
-                            <input class="form-control" placeholder="Search..." name="s" id="s" type="text">
+                            <input class="form-control" placeholder="Search By Price..." name="nom" id="cle" type="text">
                             <span class="input-group-btn">
 											<button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
 										</span>
@@ -124,4 +124,5 @@
     </div>
 
 </div>
+
 {% endblock %}

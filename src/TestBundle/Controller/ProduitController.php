@@ -40,26 +40,44 @@ class ProduitController extends Controller
 
     public function readAction(Request $request)
     {
-
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM TestBundle:Produit a where a.etatpr=1";
-        $query = $em->createQuery($dql);
-
-
-
+        (int)$prix=$request->get('nom');
+        if($prix <> null){
+            $em = $this->get('doctrine.orm.entity_manager');
+            $dql = "SELECT a FROM TestBundle:Produit a where a.etatpr=1 AND a.prix='$prix'";
+            $query = $em->createQuery($dql);
 
 
-        $cats=$this->getDoctrine()->getRepository(Categorieprod::class)->findAll();
-        $nbr_prod=$this->getDoctrine()->getRepository(Produit::class )->compterProduit();
+            $cats = $this->getDoctrine()->getRepository(Categorieprod::class)->findAll();
+            $nbr_prod = $this->getDoctrine()->getRepository(Produit::class)->compterProduitParPrix($prix);
 
-        $paginator  = $this->get('knp_paginator');
-        $result=$paginator->paginate(
-            $query,
-            $request->query->getInt('page',1),
-            $request->query->getInt('Limit',6)
+            $paginator = $this->get('knp_paginator');
+            $result = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                $request->query->getInt('Limit', 6)
 
 
-        );
+            );
+
+        }else {
+
+            $em = $this->get('doctrine.orm.entity_manager');
+            $dql = "SELECT a FROM TestBundle:Produit a where a.etatpr=1";
+            $query = $em->createQuery($dql);
+
+
+            $cats = $this->getDoctrine()->getRepository(Categorieprod::class)->findAll();
+            $nbr_prod = $this->getDoctrine()->getRepository(Produit::class)->compterProduit();
+
+            $paginator = $this->get('knp_paginator');
+            $result = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                $request->query->getInt('Limit', 6)
+
+
+            );
+        }
 
         return $this->render('@Test\Produit\read_prod2.html.twig', array(
             'Produits'=>$result,
@@ -112,11 +130,13 @@ class ProduitController extends Controller
         $cats=$this->getDoctrine()->getRepository(Categorieprod::class)->find($prod->getIdcp());
         $user=$this->getDoctrine()->getRepository(FosUser::class)->find($prod->getIduser());
 
+
         return $this->render('@Test\Produit\detail_prod.html.twig', array(
 
             'produits'=>$prod,
             'users'=>$user,
             'cats'=>$cats
+
         ));
     }
 
@@ -213,6 +233,9 @@ class ProduitController extends Controller
 
         $nbr_prod=$this->getDoctrine()->getRepository(Produit::class )->compterMyFiltredProduit($idcat,$fosusers);
         $cats=$this->getDoctrine()->getRepository(Categorieprod::class)->find($idcat);
+        $cat=$this->getDoctrine()->getRepository(Categorieprod::class)->findAll();
+        $favoris=$this->getDoctrine()->getRepository(Favoris::class)->findAll();
+
         $paginator  = $this->get('knp_paginator');
         $result=$paginator->paginate(
             $query,
@@ -225,6 +248,9 @@ class ProduitController extends Controller
         return $this->render('@Test\Produit\Myprod_filtred.html.twig', array(
             'Produits'=>$result,
              'cats'=>$cats,
+            'cat'=>$cat,
+            'favoris'=>$favoris,
+            'fos'=>$fosusers,
             'nbr'=>$nbr_prod
         ));
 
@@ -308,9 +334,47 @@ class ProduitController extends Controller
             'nbr'=>$nbr_prod
         ));
 
+    }
+
+    public function MailSendAction($id){
+
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $cat=$this->getDoctrine()->getRepository(Categorieprod::class)->findAll();
+        $prod=$em->getRepository(Produit::class)->find(3);
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $fosusers=new FosUser();
+        $fosusers=$this->getDoctrine()->getManager()->getRepository(FosUser::class)->find($user->getId()) ;
+        $owner=$this->getDoctrine()->getManager()->getRepository(FosUser::class)->find($id) ;
+        $mail_owner=$owner->getEmail();
 
 
+        require_once 'C:\xampp\htdocs\pidevtow\vendor\autoload.php';
 
+// Create the Transport
+        $transport = (new \Swift_SmtpTransport('localhost', 25))
+            ->setUsername('FERCHICHI.2 Ahmed')
+            ->setPassword('Genkobeloba 58')
+        ;
+
+// Create the Mailer using your created Transport
+        $mailer = new \Swift_Mailer($transport);
+
+// Create a message
+        $message = (new \Swift_Message('About Product Eco-System'))
+            ->setFrom(['ahmed.ferchichi.2@esprit.tn' => 'Admin'])
+            ->setTo([$mail_owner => $owner->getUsername()])
+            ->setBody('Mr/M/Mlle'.$fosusers->getUsername()."veut acheter votre produit et ceci le mail a contacter".$fosusers->getEmail()." Cordialement")
+        ;
+
+// Send the message
+        $result = $mailer->send($message);
+        return $this->render('@Test\Produit\detail_prod.html.twig', array(
+
+            'produits'=>$prod,
+            'users'=>$fosusers,
+            'cats'=>$cat
+
+        ));
 
 
 
@@ -319,5 +383,14 @@ class ProduitController extends Controller
 
 
     }
+
+
+
+
+
+
+
+
+
 
 }

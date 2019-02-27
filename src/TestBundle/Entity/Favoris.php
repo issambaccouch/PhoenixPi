@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="favoris", indexes={@ORM\Index(name="iduser", columns={"iduser"}), @ORM\Index(name="idcp", columns={"idcp"})})
  * @ORM\Entity
+ *  @ORM\Entity(repositoryClass="TestBundle\Repository\FavorisRepository")
  */
 class Favoris
 {

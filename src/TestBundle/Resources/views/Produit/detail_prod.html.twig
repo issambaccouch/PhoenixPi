@@ -42,8 +42,11 @@
                           <p class="mb-5"> <strong class="rating">Prix:</strong><span class="amount">{{produits.prix}}DT</span></p>
                     {% endif %}
 
-
-
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <p class="mb-5"> <div class="mb-3">
+                        <button id="addToTable" class="btn"><a href="{{ path('mail_send',{'id':produits.iduser}) }}">Intéressé(Contacter Par Mail)</a> <i class="fa fa-mail-forward"></i></button>
+                    </div></p>
+                           {% endif %}
 
 
 
