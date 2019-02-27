@@ -1,0 +1,101 @@
+{% extends "@Forum/layout.html.twig" %}
+
+{% block title %}{{ forum.name }}{% endblock %}
+
+{% block body %}
+  <p>
+    <input type="text" id="cle" />
+  </p>
+    <h1 class="text-center">{{ forum.name }} <small>({{ pagination.getTotalItemCount }} topics)</small></h1>
+    <p class="text-center">{{ forum.description }}</p>
+    {{ knp_pagination_render(pagination) }}
+      {% for topic in pagination %}
+        <div class="list-group-item" id="Topic{{ topic.id }}">
+          <div class="row">
+            <div id="content{{ topic.id }}" class="col-md-4 col-xs-12 topic-content">
+              <a href="{{ path('forum_post', {'slug': topic.slug}) }}">
+                <h2 class="topic-title">{{ topic.title }}</h2>
+                {% if topic.user is not null %}
+                  {% set username = topic.user.username %}
+                {% else %}
+                  {% set username = 'forum.deleted.user'|trans %}
+                {% endif %}
+                <span class="small">{{ 'forum.by'|trans }} <strong>{{ username }}</strong>
+                  {{ 'forum.on'|trans }} {{ topic.date|date("Y-m-d H:i:s") }}
+                </span>
+              </a>
+            </div>
+            <div class="col-md-2 topic-msg-count">
+              {% set posts_count = topic.posts|length %}
+              <p><span class="badge">{{ posts_count }} {{ posts_count > 1 ? 'forum.posts'|trans : 'forum.post'|trans }}</span></p>
+              <p><span class="badge">{{ topic.views }} {{ topic.views > 1 ? 'forum.topic.views'|trans : 'forum.topic.view'|trans }}</span></p>
+              <p>
+                {% if topic.resolved == true %}<br />{{ 'forum.label.issolved'|trans }}{% endif %}
+                {% if topic.pinned == true %}<br />{{ 'forum.label.ispinned'|trans }}{% endif %}
+                {% if topic.closed == true %}<br />{{ 'forum.label.isclosed'|trans }}{% endif %}
+              </p>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              {% if topic.posts.last.poster is not null %}
+                {% set username = topic.posts.last.poster.username %}
+              {% else %}
+                {% set username = 'forum.deleted.user'|trans %}
+              {% endif %}
+              <a class="lastComment" href="{{ path('forum_post', {'slug': topic.slug}) }}">
+                <p class="topic-poster">{{ 'forum.lastpostby'|trans }} <strong>{{ username }}</strong></p>
+                <p class="topic-lastpost-date">{{ topic.posts.last.date|date("Y-m-d H:i:s") }}</p>
+              </a>
+            </div>
+          </div>
+          {% if is_granted('ROLE_MODERATOR') %}  
+            <div class="row admin">
+              <ul class="pull-right list-inline">
+                <li><a id="{{ topic.id }}" class="editAction" href="{{ path("forum_topic_edit", {'id': topic.id}) }}"><i class="glyphicon glyphicon-edit"></i> {{ 'forum.edit'|trans }}</a></li>
+                <li><a href="{{ path('forum_topic_delete', {'id': topic.id}) }}"><i class="glyphicon glyphicon-remove"></i> {{ 'forum.remove'|trans }}</a></li>
+              </ul>
+            </div>
+          {% endif %}
+        </div>    
+      {% else %}
+        <div class="list-group-item text-center"><h5>{{ 'forum.null'|trans }}</h5></div>
+      {% endfor %}
+ 
+
+  {{ knp_pagination_render(pagination) }}
+  {% if form is not null %}
+    {% include 'ForumBundle:Form:Topic.html.twig' %}
+  {% endif %}
+{% endblock %}
+{% block javascripts %}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script>
+  import * as $ from "../../../../web/assets/vendor/jquery-ui/development-bundle/jquery-1.10.2";
+
+  var loader = "{{ asset('loader.gif') }}"; //link to the animated loader-small.gif
+  $('#cle').keyup(
+          function () {
+            let input=$('#cle').val();
+            $.ajax({
+              url:"{{ path ('gerer_events')}}",
+              type:'POST',
+              data:{'nom':input},
+              success:function (data){console.log(data);
+                $.each(data,function ( i,ele) {
+                  $('#Topic{{ topic.id }}').append(
+                          "<td>"+ele.nomev+"</td>"+
+                          "<td>"+ele.lieu+"</td>"+
+                          "<td>"+ele.nbrparticipants+"</td>"+
+                          "<td>"+"</td>"+
+                          "<td>"+"</td>"+
+                          "<td>"+ "</td>"+
+                          "</tr>"
+                )
+
+                })}
+
+            })
+
+          }
+  )
+  </script>
+{% endblock  %}

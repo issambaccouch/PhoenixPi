@@ -1,7 +1,17 @@
 {% extends "@Forum/layout.html.twig" %}
 {% block body %}
-<input type="text" name="nom" id="cle"  placeholder="Rechercher" >
-<table>
+    <center><h1 class="text-danger">Search For Forum Categories </h1></center>
+    <div class="active-pink-3 active-pink-4 mb-4">
+        <input class="form-control" name="nom" id="cle" type="text" placeholder="Search" aria-label="Search">
+    </div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">description</th>
+    </tr>
+    </thead>
     <tbody id="tb">
     {% for post in cats %}
         <tr>
@@ -11,7 +21,7 @@
             <td>
                 <center>{{ post.cat }}</center>
             </td>
-            <td>
+            <td scope="row">
                 <center>{{ post.content }}</center>
             </td>
         </tr>
@@ -31,7 +41,7 @@
                     $('#tb').empty();
                     $.each(data,function (i,ele){
                         $('#tb').append(
-                            "<tr bgcolor='#00bfff'>"+
+                            "<tr >"+
                             "<td>"+ele.id+"</td>"+
                             "<td>"+ele.content+"</td>"+
                             "</tr>"

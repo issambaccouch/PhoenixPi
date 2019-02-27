@@ -7,8 +7,6 @@
 
     <h1 class="text-center">{{ forum.name }} <small>({{ pagination.getTotalItemCount }} topics)</small></h1>
     <p class="text-center">{{ forum.description }}</p>
-   <input type="text" class="form-control" placeholder="rechercher par Nom :" id="recherche" name="evenementrecherche" style="width: 200px">
-    <div class="searching">
     {{ knp_pagination_render(pagination) }}
       {% for topic in pagination %}
         <div class="list-group-item" id="Topic{{ topic.id }}">
@@ -63,7 +61,6 @@
       {% endfor %}
  
   {{ knp_pagination_render(pagination) }}
-    </div>
     {% if form is not null %}
     {% include 'ForumBundle:Form:Topic.html.twig' %}
   {% endif %}

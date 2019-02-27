@@ -1,21 +1,17 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+You Are Already Connected
+{% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+{% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
 <div class="container">
     <div class="row">
 
            <!-- <form action="{{ path('fos_user_registration_register') }}"  id="frmSignUp" method="post" class:'fos_user_registration_register'}"> -->
-
                   {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
         <div class="box-content">
+            <h4 class="heading-primary text-uppercase mb-3">Register An Account</h4>
             <div class="form-row">
                 <div class="form-group col">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <h4 class="heading-primary text-uppercase mb-3">You Already Connected</h4>
-
-                    {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <h4 class="heading-primary text-uppercase mb-3">You Already Connected</h4>
-                    {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-                    <h4 class="heading-primary text-uppercase mb-3">Register An Account</h4>
-
                     {{ form_row(form.Nom) }}
                 </div>
             </div>
@@ -23,70 +19,7 @@
                     <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary float-right mb-5" data-loading-text="Loading..." />
                   {{ form_end(form) }}
                 </div>
-        {% endif %}
         </div>
     </div>
-</div>
-</div>
+{% endif %}
 
-
- <!--   <h3 class="card-title text-center font-weight-bold">Registration</h3>
-    <input type="text" id="Prenom" name="_Prenom" required="required" class="form-control" type="text" placeholder="Prenom">
-    <input type="text" id="Nom" name="_Nom" required="required" class="form-control" type="text" placeholder="Nom">
-    <input type="text" id="email" name="_email" required="required" class="form-control" type="text" placeholder="Adress email">
-    <input type="text" id="username" name="_username" required="required" class="form-control" type="text" placeholder="Username">
-    <input type="password" id="plainPassword" name="_plainPassword" required="required" class="form-control" type="text" placeholder="Password">
-    <input type="password" id="password_confirmation" name="_password_confirmation" required="required" class="form-control" type="text" placeholder="password_confirmation">
-
-$builder
-->add('Nom', null, array('label' => 'form.nom', 'translation_domain' => 'FOSUserBundle'))
-->add('Prenom', null, array('label' => 'form.prenom', 'translation_domain' => 'FOSUserBundle'))
-->add('email', EmailType::class, array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
-->add('plainPassword', RepeatedType::class, array(
-'type' => PasswordType::class,
-'options' => array(
-'translation_domain' => 'FOSUserBundle',
-'attr' => array(
-'autocomplete' => 'new-password',
-),
-),
-'first_options' => array('label' => 'form.password'),
-'second_options' => array('label' => 'form.password_confirmation'),
-'invalid_message' => 'fos_user.password.mismatch',
-))
-;
-}
-
-<input type="text" id="Nom" name="_Nom" required="required" class="form-control form-control-lg" tabindex="2" />
-
-<div class="box-content">
-    <h4 class="heading-primary text-uppercase mb-3">I'm a Returning Customer</h4>
-    <form action="/" id="frmSignIn" method="post">
-        <div class="form-row">
-            <div class="form-group col">
-                <label>Username or E-mail Address</label>
-                <input type="text" value="" class="form-control form-control-lg">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <a class="float-right" href="#">(Lost Password?)</a>
-                <label>Password</label>
-                <input type="password" value="" class="form-control form-control-lg">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-lg-6">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="rememberme" name="rememberme"> Remember Me
-                    </label>
-                </div>
-            </div>
-            <div class="form-group col-lg-6">
-                <input type="submit" value="Login" class="btn btn-primary float-right mb-5" data-loading-text="Loading...">
-            </div>
-        </div>
-    </form>
-</div>  -->

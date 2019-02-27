@@ -1,0 +1,69 @@
+{% extends "adminbase.html.twig" %}
+{% block contentbody %}
+<div class="row">        
+  <div class="col-xs-12">
+    <div class="widget-box">
+      <div class="widget-title">
+        <span class="icon"><i class="fa fa-file"></i></span><h5>{{ 'forum.category.manage'|trans }}</h5>
+        <span title="{{ categories|length }} {{ 'forum.categories'|trans }}" class="label label-danger tip-left">{{ categories|length }}</span>
+        <span title="{{ forums|length }} {{ 'forum.forums'|trans }}" class="label label-warning tip-left">{{ forums|length }}</span>      
+      </div>
+      <div class="widget-content nopadding">
+        <ul class="recent-posts">
+          <li class="viewall">
+            <a class="tip-top" href="{{ path('forum_create_category') }}"> {{ 'forum.category.createnew'|trans }} </a>
+          </li>
+          {% for category in categories %}
+          <li>
+            <h4>{{ category.name }}:</h4>
+            <div>
+              <a href="{{ path('forum_create_forum', {'id': category.id}) }}" class="btn btn-success btn-xs">{{ 'forum.category.addforum'|trans }}</a>
+              <a href="{{ path('forum_edit_category', {'id': category.id}) }}" class="btn btn-warning btn-xs">{{ 'forum.edit'|trans }}</a>
+              <a href="{{ path('forum_remove_category', {'id': category.id}) }}" class="btn btn-danger btn-xs">{{ 'forum.remove'|trans }}</a>
+            </div>
+            <br />
+            <span class="user-info">{{ 'forum.category.position'|trans }}: {{ category.position }}</span>
+            <span class="user-info">{{ 'forum.category.countforum'|trans }} {{ category.forums|length }}</span>
+            {% if category.readAuthorisedRoles is not null %}
+              <span class="user-info">({{  category.readAuthorisedRoles }})</span>
+            {% endif %}
+            <div class="clearfix"></div>
+            <br />
+            <div class="forums">
+              <h5>{{ 'forum.forum.incat'|trans }} {{ category.name  }}</h5>
+              <br />
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>{{ 'forum.title'|trans }}</th>
+                    <th>{{ 'forum.description'|trans }}</th>
+                    <th>{{ 'forum.topics'|trans }}</th>
+                    <th>{{ 'forum.position'|trans }}</th>
+                    <th>{{ 'forum.action'|trans }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for forum in category.forums %}
+                  <tr>
+                    <td>{{ forum.name }}</td>
+                    <td>{{ forum.description }}</td>
+                    <td class="text-center">{{ forum.topics|length }}</td>
+                    <td class="text-center">0</td>
+                    <td class="text-center"><a href="{{ path('forum_edit_forum', {'id': forum.id}) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></a> <a href="{{ path('forum_remove_forum', {'id': forum.id}) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </li>
+          {% endfor %}
+
+          <li class="viewall">
+            <a class="tip-top" href="{{ path('forum_create_category') }}"> {{ 'forum.category.createnew'|trans }} </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

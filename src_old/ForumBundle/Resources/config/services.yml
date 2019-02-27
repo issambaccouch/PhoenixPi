@@ -1,0 +1,71 @@
+services:
+  topic.listener.update_last_post:
+    class: ForumBundle\EventListener\UpdateTopic
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }
+      - { name: doctrine.event_listener, event: postRemove }
+
+  forum.pagin:
+    class: ForumBundle\Component\Pagin
+    public: true
+    arguments:
+      - '@request_stack'
+      - '@knp_paginator'
+      - '%forum.pagination%'
+      - '%forum.pagination.pagename%'
+
+  forum.security.category_voter:
+    class: ForumBundle\Security\CategoryVoter
+    arguments: ['@security.access.decision_manager']
+    public: false
+    tags:
+      - { name: security.voter }
+
+  forum.security.forum_voter:
+    class: ForumBundle\Security\ForumVoter
+    arguments:
+      - '@security.access.decision_manager'
+    public: false
+    tags:
+      - { name: security.voter }
+
+  forum.security.topic_voter:
+    class: ForumBundle\Security\TopicVoter
+    arguments: ['@security.access.decision_manager']
+    public: false
+    tags:
+      - { name: security.voter }
+
+  forum.security.post_voter:
+    class: ForumBundle\Security\PostVoter
+    arguments: ['@security.access.decision_manager']
+    public: false
+    tags:
+      - { name: security.voter }
+
+  forum.twig_extension:
+    class: ForumBundle\Twig\ForumExtension
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@router'
+      - '%forum.pagination%'
+    public: false
+    tags:
+      - { name: twig.extension }
+
+  forum.form.remove.forum:
+    class: ForumBundle\Form\Type\Remover\RemoveForumType
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+      - { name: form.type }
+
+  forum.form.remove.category:
+    class: ForumBundle\Form\Type\Remover\RemoveCategoryType
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+      - { name: form.type }
+
+  forum.listener.drop_user:
+    class: ForumBundle\EventListener\ForumListener
+    tags:
+      - { name: doctrine.event_listener, event: preRemove }
